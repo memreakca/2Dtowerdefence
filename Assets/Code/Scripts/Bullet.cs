@@ -1,4 +1,3 @@
-using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,14 +72,5 @@ public class Bullet : MonoBehaviour
         isDone = true;
         collision2D.gameObject.GetComponent<Health>().TakeDamage(extraDamage+bulletDamage);
         Destroy(gameObject);
-    }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 }
