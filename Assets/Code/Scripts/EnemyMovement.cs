@@ -17,12 +17,15 @@ public class EnemyMovement : MonoBehaviour
     private float baseSpeed;
     private Transform target;
     private int pathIndex = 0;
-   
+    private Color originalColor;
+
+
 
     private void Start()
     {
         baseSpeed = moveSpeed;
         target = LevelManager.main.path[pathIndex];
+        originalColor = GetComponent<SpriteRenderer>().color;
     }
   
     private void Update()
@@ -66,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
         {
             isSlowed = true;
             moveSpeed *= slowFactor;
-
+            GetComponent<SpriteRenderer>().color = Color.Lerp(originalColor, Color.blue, 0.3f);
             // Reset the speed after the duration
             StartCoroutine(ResetSpeedAfterDelay(duration));
         }
@@ -87,7 +90,7 @@ public class EnemyMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-
+        GetComponent<SpriteRenderer>().color = originalColor;
         moveSpeed = baseSpeed;
         isSlowed = false;
     }

@@ -18,12 +18,16 @@ public class Turret : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private Animator animator;
+
 
 
     [Header("Attribute")]
+    [SerializeField] private float angleOffset = 0f;
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float bps = 1f; // Bullet per sec
+    [SerializeField] private float baseBps = 1f; // Basebps per sec
     [SerializeField] public int UpgradeCost = 150;
     [SerializeField] private int TurretLevel = 1;
     [SerializeField] private int maxTurretLevel = 4;
@@ -37,6 +41,7 @@ public class Turret : MonoBehaviour
             return; //Debug.Log("It is MAX Level");
         else
         {
+            
             if (LevelManager.main.currency >= UpgradeCost)
             {
                 LevelManager.main.currency = LevelManager.main.currency - UpgradeCost;
@@ -77,6 +82,15 @@ public class Turret : MonoBehaviour
         UpdateUpgradeUI();
         UpdateSellCostUI();
 
+        animator.speed = bps / baseBps;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            bps = bps * 1.15f;
+            targetingRange = targetingRange * 1.1f;
+            TurretLevel++;
+        }
+
         if (target == null)
         { FindTarget();
             return;
@@ -102,40 +116,53 @@ public class Turret : MonoBehaviour
     
      private void Shoot()
     {
+        animator.SetTrigger("Shoot");
+ 
+    }
+
+    public void SpawnBullet()
+    {
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
-  
     }
    
-    private bool CheckTargetIsInRange()
-    {
-        return Vector2.Distance(target.position, transform.position) <= targetingRange;
-    }
     private void RotateTowardsTarget()
     {
-        float angle = Mathf.Atan2(target.position.y - transform.position.y,target.position.x - transform.position.x ) * Mathf.Rad2Deg - 110f ;
+        Vector3 pivot = turretRotationPoint.position;
+        Vector2 dir = (target.position - pivot);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset; // angleOffset ile sprite yönünü düzelt
+        Quaternion desired = Quaternion.Euler(0f, 0f, angle);
+        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, desired, rotationSpeed * Time.deltaTime);
 
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation,targetRotation,rotationSpeed* Time.deltaTime);
+        Debug.DrawLine(pivot, target.position, Color.red);
+        Debug.DrawRay(pivot, turretRotationPoint.right * 1f, Color.green);
     }
 
-  
+
+    private bool CheckTargetIsInRange()
+    {
+        return Vector2.Distance(target.position, turretRotationPoint.position) <= targetingRange;
+    }
+
     private void FindTarget()
-
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)transform.position, 0f, enemyMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(turretRotationPoint.position, targetingRange, enemyMask);
+        if (hits.Length == 0) return;
 
-        if (hits.Length > 0)
+        // en yakýn hedefi seç (daha stabil)
+        float minDist = float.MaxValue;
+        Transform closest = null;
+        foreach (var c in hits)
         {
-            target = hits[0].transform;
+            float d = Vector2.Distance(turretRotationPoint.position, c.transform.position);
+            if (d < minDist)
+            {
+                minDist = d;
+                closest = c.transform;
+            }
         }
-    }
-
-  
-    void Start()
-    {
-        
+        target = closest;
     }
 
 }

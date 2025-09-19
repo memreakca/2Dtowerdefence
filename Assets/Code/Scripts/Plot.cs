@@ -6,6 +6,8 @@ public class Plot : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Transform towerSpawnPoint;
+
 
     private GameObject towerObject;
     public Turret turret;
@@ -25,7 +27,7 @@ public class Plot : MonoBehaviour
 
         }
         LevelManager.main.SpendCurrency(towerToBuild.cost); 
-        towerObject = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        towerObject = Instantiate(towerToBuild.prefab, towerSpawnPoint.position, Quaternion.identity);
         turret = towerObject.GetComponent<Turret>();    
     }
 }
