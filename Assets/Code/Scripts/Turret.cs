@@ -12,6 +12,7 @@ public class Turret : MonoBehaviour
     public static Turret main;
 
     [Header("References")]
+    [SerializeField] private GameObject Tower;
     [SerializeField] TextMeshProUGUI UpgradeCostUI;
     [SerializeField] TextMeshProUGUI SellCostUI;
     [SerializeField] private Transform turretRotationPoint;
@@ -20,7 +21,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firingPoint;
     [SerializeField] private Animator animator;
 
-
+    [Header("UpgradeTurretMultipliers")]
+    [SerializeField] private float bpsUpgradeFactor;
+    [SerializeField] private float rangeUpgradeFactor;
+    [SerializeField] private float costUpgradeFactor;
 
     [Header("Attribute")]
     [SerializeField] private float angleOffset = 0f;
@@ -28,9 +32,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float bps = 1f; // Bullet per sec
     [SerializeField] private float baseBps = 1f; // Basebps per sec
-    [SerializeField] public int UpgradeCost = 150;
+    [SerializeField] public float UpgradeCost = 150;
     [SerializeField] private int TurretLevel = 1;
     [SerializeField] private int maxTurretLevel = 4;
+    [SerializeField] private bool isRotateable = false;
 
     public float sellCost;
 
@@ -45,9 +50,9 @@ public class Turret : MonoBehaviour
             if (LevelManager.main.currency >= UpgradeCost)
             {
                 LevelManager.main.currency = LevelManager.main.currency - UpgradeCost;
-                bps = bps * 1.15f;
-                targetingRange = targetingRange * 1.1f;
-                UpgradeCost = UpgradeCost * 2;
+                bps = bps * bpsUpgradeFactor;
+                targetingRange = targetingRange * rangeUpgradeFactor;
+                UpgradeCost = UpgradeCost * costUpgradeFactor;
                 TurretLevel++;
 
             }
@@ -62,7 +67,7 @@ public class Turret : MonoBehaviour
     {
         sellCost = UpgradeCost * 0.4f;
         LevelManager.main.currency += sellCost;
-        Destroy(gameObject);
+        Destroy(Tower);
     }
     private void UpdateUpgradeUI()
     {
@@ -70,12 +75,12 @@ public class Turret : MonoBehaviour
         if (TurretLevel == maxTurretLevel)
             UpgradeCostUI.text = "MAX LEVEL";
         else
-            UpgradeCostUI.text ="Upgrade Cost= " + UpgradeCost.ToString()  + "\nTurret Level= " + TurretLevel.ToString();
+            UpgradeCostUI.text ="Upgrade Cost= " + UpgradeCost.ToString() + "$" + "\nTurret Level= " + TurretLevel.ToString();
     }
 
     private void UpdateSellCostUI()
     {
-        SellCostUI.text = "Sell Turret " ;
+        SellCostUI.text = "Sell Turret " + (UpgradeCost * 0.4).ToString() + "$" ;
     }
     void Update()
     {
@@ -120,23 +125,26 @@ public class Turret : MonoBehaviour
  
     }
 
-    public void SpawnBullet()
+    public void SpawnProjectile()
     {
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
-        bulletScript.SetTarget(target);
+        ProjectileMovement projectileScript = bulletObj.GetComponent<ProjectileMovement>();
+        projectileScript.SetTarget(target);
     }
    
     private void RotateTowardsTarget()
     {
-        Vector3 pivot = turretRotationPoint.position;
-        Vector2 dir = (target.position - pivot);
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset; // angleOffset ile sprite yönünü düzelt
-        Quaternion desired = Quaternion.Euler(0f, 0f, angle);
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, desired, rotationSpeed * Time.deltaTime);
+        if (isRotateable)
+        {
+            Vector3 pivot = turretRotationPoint.position;
+            Vector2 dir = (target.position - pivot);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset; // angleOffset ile sprite yönünü düzelt
+            Quaternion desired = Quaternion.Euler(0f, 0f, angle);
+            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, desired, rotationSpeed * Time.deltaTime);
 
-        Debug.DrawLine(pivot, target.position, Color.red);
-        Debug.DrawRay(pivot, turretRotationPoint.right * 1f, Color.green);
+            Debug.DrawLine(pivot, target.position, Color.red);
+            Debug.DrawRay(pivot, turretRotationPoint.right * 1f, Color.green);
+        }
     }
 
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6655868820326235933}
   - component: {fileID: 432115355933513345}
   - component: {fileID: 6571561564997443648}
+  - component: {fileID: -3958619769645579429}
   - component: {fileID: 89750278857988447}
   - component: {fileID: 9020479745730222860}
   - component: {fileID: 5995923671524804320}
@@ -115,6 +116,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3958619769645579429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7637528849480179392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63507d9bcd28314cb15a2e4dcb58442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6571561564997443648}
+  bulletSpeed: 2.5
 --- !u!114 &89750278857988447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,8 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d482dba251a3d84fb24fb17e11d3c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 6571561564997443648}
-  bulletSpeed: 2.5
   bulletDamage: 3
   maxBulletdamage: 8
   UpgradeCost: 5000

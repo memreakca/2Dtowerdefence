@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 5848697185760695172}
   - component: {fileID: 5848697185760695171}
   - component: {fileID: 492588981188280993}
+  - component: {fileID: -4987903082122837087}
   - component: {fileID: 4240565792878792980}
   - component: {fileID: 6763529680460649122}
+  - component: {fileID: 1164007577071967665}
   m_Layer: 7
-  m_Name: FreezeBullet
+  m_Name: FreezeProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,14 +29,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5848697185760695170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.758, y: 9.903001, z: 0}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.0014308714, w: 0.99999905}
+  m_LocalPosition: {x: -6.761512, y: 9.904434, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.164}
 --- !u!212 &5848697185760695171
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: -539705397
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 62bb9fbee51f88a4f981247af04602c7, type: 3}
+  m_Sprite: {fileID: -1235419056, guid: 9dabac48c2fd319439aaa60e4748d2a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,10 +106,30 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4987903082122837087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848697185760695170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63507d9bcd28314cb15a2e4dcb58442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 492588981188280993}
+  bulletSpeed: 3
 --- !u!114 &4240565792878792980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,8 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc5db8f2a8bb3d4b9ab3705a8a6f2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 492588981188280993}
-  bulletSpeed: 3
   bulletDamage: 2
   FreezeTime: 1.5
   slowFactor: 0.4
@@ -135,9 +155,49 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.016311008, y: 0.016743341}
-  m_Size: {x: 0.08743286, y: 0.52850723}
+  m_Offset: {x: 0.016311139, y: -0.021149447}
+  m_Size: {x: 0.087433845, y: 0.15893698}
   m_Direction: 0
+--- !u!95 &1164007577071967665
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848697185760695170}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c9bf7a8cf20cf2e44bd481f97bb8fbc0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

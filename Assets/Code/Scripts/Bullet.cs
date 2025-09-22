@@ -5,11 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public static Bullet main;
-    [Header("References")]
-    [SerializeField] private Rigidbody2D rb;
 
     [Header("Attributes")]
-    [SerializeField] private float bulletSpeed = 2.5f;
     [SerializeField] private float bulletDamage = 3f;
     [SerializeField] private float maxBulletdamage = 7f;
     [SerializeField] private float UpgradeCost = 5000f;
@@ -17,8 +14,6 @@ public class Bullet : MonoBehaviour
     private bool isDone;
     public static float extraDamage;
     
-    private Transform target;
-  
 
     public void UpgradeBulletDamage()
     {
@@ -35,33 +30,9 @@ public class Bullet : MonoBehaviour
             else
                 return;//Debug.Log("Not Enogh Money");
         }
-        
-    }
-    public void SetTarget(Transform _target)
-    {
-        target = _target;
+
     }
 
-    void OnBecameInvisible()
-    {
-        Destroy(gameObject);
-    }
-
-    private void FixedUpdate()
-    {
-
-        if (!target)
-        {
-            return;
-        }
-        Vector2 direction = (target.position - transform.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 85f;
-        // Apply rotation to the bullet sprite
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        rb.velocity = direction * bulletSpeed;
-    }
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {//take hp from enemy
