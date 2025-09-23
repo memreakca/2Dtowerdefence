@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
     [SerializeField] TextMeshProUGUI SellCostUI;
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private LayerMask enemyMask;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private Animator animator;
 
@@ -25,28 +25,43 @@ public class Turret : MonoBehaviour
     [SerializeField] private float bpsUpgradeFactor;
     [SerializeField] private float rangeUpgradeFactor;
     [SerializeField] private float costUpgradeFactor;
+    [SerializeField] public float UpgradeCost;
 
-    [Header("Attribute")]
-    [SerializeField] private float angleOffset = 0f;
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float bps = 1f; // Bullet per sec
-    [SerializeField] private float baseBps = 1f; // Basebps per sec
-    [SerializeField] public float UpgradeCost = 150;
-    [SerializeField] private int TurretLevel = 1;
-    [SerializeField] private int maxTurretLevel = 4;
+    [Header("General Attributes")]
     [SerializeField] private bool isRotateable = false;
+    [SerializeField] private float angleOffset = 0f;
+    [SerializeField] private float rotationSpeed = 5f;
+
+    [Header("Turret Attributes")]
+    [SerializeField] private int maxTurretLevel;
+    [SerializeField] private float baseBps;
+    [SerializeField] private float baseTargetingRange;
+    [SerializeField] private float baseProjectileDamage;
+    [SerializeField] private float baseProjectileSpeed;
+
+
+    [Header("IN-GAME Visual Attributes")]
+    [SerializeField] private float targetingRange = 5f;
+    [SerializeField] private float bps = 1f; // Bullet per sec
+    [SerializeField] private float projectileDamage;
+    [SerializeField] private int TurretLevel = 1;
 
     public float sellCost;
 
+    private void Start()
+    {
+        projectileDamage = baseProjectileDamage;
+        bps = baseBps;
+        targetingRange = baseTargetingRange;
 
+    }
     public void UpgradeTurret()
     {
         if (TurretLevel == maxTurretLevel)
             return; //Debug.Log("It is MAX Level");
         else
         {
-            
+
             if (LevelManager.main.currency >= UpgradeCost)
             {
                 LevelManager.main.currency = LevelManager.main.currency - UpgradeCost;
@@ -75,12 +90,12 @@ public class Turret : MonoBehaviour
         if (TurretLevel == maxTurretLevel)
             UpgradeCostUI.text = "MAX LEVEL";
         else
-            UpgradeCostUI.text ="Upgrade Cost= " + UpgradeCost.ToString() + "$" + "\nTurret Level= " + TurretLevel.ToString();
+            UpgradeCostUI.text = "Upgrade Cost= " + UpgradeCost.ToString() + "$" + "\nTurret Level= " + TurretLevel.ToString();
     }
 
     private void UpdateSellCostUI()
     {
-        SellCostUI.text = "Sell Turret " + (UpgradeCost * 0.4).ToString() + "$" ;
+        SellCostUI.text = "Sell Turret " + (UpgradeCost * 0.4).ToString() + "$";
     }
     void Update()
     {
@@ -97,7 +112,8 @@ public class Turret : MonoBehaviour
         }
 
         if (target == null)
-        { FindTarget();
+        {
+            FindTarget();
             return;
         }
 
@@ -110,7 +126,7 @@ public class Turret : MonoBehaviour
         else
         {
             timeUntilFire += Time.deltaTime;
-            if(timeUntilFire >= 1f / bps)
+            if (timeUntilFire >= 1f / bps)
             {
                 Shoot();
                 timeUntilFire = 0f;
@@ -118,20 +134,22 @@ public class Turret : MonoBehaviour
         }
     }
 
-    
-     private void Shoot()
+
+    private void Shoot()
     {
         animator.SetTrigger("Shoot");
- 
     }
 
     public void SpawnProjectile()
     {
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        ProjectileMovement projectileScript = bulletObj.GetComponent<ProjectileMovement>();
+        GameObject projectileObj = Instantiate(projectilePrefab, firingPoint.position, Quaternion.identity);
+        IProjectile damageScript = projectileObj.GetComponent<IProjectile>();
+        damageScript.SetDamage(projectileDamage);
+        ProjectileMovement projectileScript = projectileObj.GetComponent<ProjectileMovement>();
+        projectileScript.SetProjectileSpeed(baseProjectileSpeed);
         projectileScript.SetTarget(target);
     }
-   
+
     private void RotateTowardsTarget()
     {
         if (isRotateable)

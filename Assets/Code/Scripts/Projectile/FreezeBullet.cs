@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeBullet : MonoBehaviour
+public class FreezeBullet : MonoBehaviour , IProjectile
 {
 
     [Header("Attributes")]
-    [SerializeField] private float bulletDamage = 1.5f;
     [SerializeField] private float FreezeTime = 1f;
     [SerializeField] private float slowFactor = 0.5f;
 
+    private float bulletDamage;
     private bool isDone;
+
+    public void SetDamage(float damage)
+    {
+        bulletDamage = damage;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
-    {//take hp from enemy
+    {
 
         if (isDone)
         {
@@ -28,6 +34,7 @@ public class FreezeBullet : MonoBehaviour
         enemy.ApplySlow(slowFactor, FreezeTime);
         
     }
+
 
     
 }

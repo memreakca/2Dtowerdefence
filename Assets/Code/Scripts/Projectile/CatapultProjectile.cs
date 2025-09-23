@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatapultProjectile : MonoBehaviour
+public class CatapultProjectile : MonoBehaviour , IProjectile
 {
     [Header("Attributes")]
     [SerializeField] private float explosionDamage = 3f;
@@ -13,14 +13,13 @@ public class CatapultProjectile : MonoBehaviour
 
     private bool isDone;
     private void OnCollisionEnter2D(Collision2D collision2D)
-    {//take hp from enemy
+    {
         if (isDone)
         {
             return;
         }
         isDone = true;
         Explode();
-        //collision2D.gameObject.GetComponent<Health>().TakeDamage();
         Destroy(gameObject);
     }
 
@@ -45,4 +44,10 @@ public class CatapultProjectile : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
+
+    public void SetDamage(float damage)
+    {
+        explosionDamage = damage;
+    }
+
 }

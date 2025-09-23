@@ -10,7 +10,7 @@ public class ProjectileMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Attributes")]
-    [SerializeField] private float bulletSpeed = 2.5f;
+    [SerializeField] private float projectileSpeed ;
     private Transform target;
 
     private void Start()
@@ -20,6 +20,10 @@ public class ProjectileMovement : MonoBehaviour
     public void SetTarget(Transform _target)
     {
         target = _target;
+    }
+    public void SetProjectileSpeed(float _projectileSpeed)
+    {
+        projectileSpeed = _projectileSpeed;
     }
 
     void OnBecameInvisible()
@@ -40,7 +44,7 @@ public class ProjectileMovement : MonoBehaviour
         // Apply rotation to the bullet sprite
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        rb.velocity = direction * bulletSpeed;
+        rb.velocity = direction * projectileSpeed;
 
     }
 

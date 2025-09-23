@@ -238,21 +238,25 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  bulletPrefab: {fileID: 7637528849480179392, guid: e15a9545be96acb469d2bc775ae1e294, type: 3}
+  projectilePrefab: {fileID: 7637528849480179392, guid: e15a9545be96acb469d2bc775ae1e294, type: 3}
   firingPoint: {fileID: 9014452508650935262}
   animator: {fileID: 3052808299717274752}
   bpsUpgradeFactor: 1.1
   rangeUpgradeFactor: 1.1
   costUpgradeFactor: 2
+  isRotateable: 1
   angleOffset: -90
-  targetingRange: 1.7
   rotationSpeed: 235
-  bps: 1.1
   baseBps: 1.1
   UpgradeCost: 200
-  TurretLevel: 1
   maxTurretLevel: 6
-  isRotateable: 1
+  baseProjectileDamage: 3
+  baseProjectileSpeed: 3
+  baseTargetingRange: 1.7
+  targetingRange: 1.7
+  bps: 1.1
+  projectileDamage: 0
+  TurretLevel: 1
   sellCost: 100
 --- !u!95 &3052808299717274752
 Animator:

@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         main = this;
-        Bullet.extraDamage = 0;
     }
 
     public void LoadMainMenu()
