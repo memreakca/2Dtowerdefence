@@ -251,7 +251,7 @@ MonoBehaviour:
   baseBps: 1.1
   UpgradeCost: 200
   TurretLevel: 1
-  maxTurretLevel: 5
+  maxTurretLevel: 6
   isRotateable: 1
   sellCost: 100
 --- !u!95 &3052808299717274752
@@ -949,7 +949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2066584646680013520}
   m_Layer: 0
-  m_Name: "BowT\u0131wer"
+  m_Name: BowTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

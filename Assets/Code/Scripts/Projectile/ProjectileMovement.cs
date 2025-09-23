@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -40,5 +41,7 @@ public class ProjectileMovement : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         rb.velocity = direction * bulletSpeed;
+
     }
+
 }

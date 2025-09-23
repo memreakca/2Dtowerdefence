@@ -128,8 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63507d9bcd28314cb15a2e4dcb58442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCurvedShoot: 0
+  arcHeight: 0
   rb: {fileID: 492588981188280993}
-  bulletSpeed: 3
+  bulletSpeed: 4
 --- !u!114 &4240565792878792980
 MonoBehaviour:
   m_ObjectHideFlags: 0
