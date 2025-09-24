@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Plot : MonoBehaviour
@@ -28,6 +29,8 @@ public class Plot : MonoBehaviour
         }
         LevelManager.main.SpendCurrency(towerToBuild.cost); 
         towerObject = Instantiate(towerToBuild.prefab, towerSpawnPoint.position, Quaternion.identity);
-        turret = towerObject.GetComponent<Turret>();    
+        towerObject.transform.SetParent(this.transform);
+        turret = towerObject.GetComponentInChildren<Turret>();
+        BuildManager.main.builtTurrets.Add(turret);
     }
 }

@@ -40,21 +40,51 @@ public class Turret : MonoBehaviour
     [SerializeField] private float baseProjectileSpeed;
 
 
-    [Header("IN-GAME Visual Attributes")]
+    [Header("IN-GAME Base Attributes")]
+    [SerializeField] private float projectileDamage;
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float bps = 1f; // Bullet per sec
-    [SerializeField] private float projectileDamage;
     [SerializeField] private int TurretLevel = 1;
 
-    public float sellCost;
+    [Header("IN-GAME Bonus Attributes")]
 
+    [SerializeField] private float bonusDamage;
+    [SerializeField] private float bonusRange;
+    [SerializeField] private float bonusBps;
+
+    [Header("IN-GAME Modifed - Used Attributes")]
+
+    [SerializeField] private float modifiedDamage;
+    [SerializeField] private float modifiedRange;
+    [SerializeField] private float modifiedBps;
+
+    public float sellCost;
     private void Start()
     {
         projectileDamage = baseProjectileDamage;
-        bps = baseBps;
-        targetingRange = baseTargetingRange;
+        modifiedDamage = projectileDamage + bonusDamage;
 
+        bps = baseBps;
+        modifiedBps = bps + bonusBps;
+
+        targetingRange = baseTargetingRange;
+        modifiedRange = targetingRange+bonusRange;
+        UpgradedValues();
     }
+
+    public void UpgradedValues()
+    {
+        Debug.Log("bps VALUE " + bonusBps);
+
+        bonusBps = UpgradeManager.instance.bpsUpgradeValue;
+        bonusRange = UpgradeManager.instance.rangeUpgradeValue;
+        bonusDamage = UpgradeManager.instance.damageUpgradeValue;
+
+        modifiedDamage = projectileDamage + bonusDamage;
+        modifiedBps = bps + bonusBps;
+        modifiedRange = targetingRange + bonusRange;
+    }
+
     public void UpgradeTurret()
     {
         if (TurretLevel == maxTurretLevel)
@@ -84,6 +114,8 @@ public class Turret : MonoBehaviour
         LevelManager.main.currency += sellCost;
         Destroy(Tower);
     }
+
+    
     private void UpdateUpgradeUI()
     {
 
@@ -101,15 +133,8 @@ public class Turret : MonoBehaviour
     {
         UpdateUpgradeUI();
         UpdateSellCostUI();
-
-        animator.speed = bps / baseBps;
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            bps = bps * 1.15f;
-            targetingRange = targetingRange * 1.1f;
-            TurretLevel++;
-        }
+        
+        animator.speed = modifiedBps / baseBps;
 
         if (target == null)
         {
@@ -126,7 +151,7 @@ public class Turret : MonoBehaviour
         else
         {
             timeUntilFire += Time.deltaTime;
-            if (timeUntilFire >= 1f / bps)
+            if (timeUntilFire >= 1f / modifiedBps)
             {
                 Shoot();
                 timeUntilFire = 0f;
@@ -144,7 +169,7 @@ public class Turret : MonoBehaviour
     {
         GameObject projectileObj = Instantiate(projectilePrefab, firingPoint.position, Quaternion.identity);
         IProjectile damageScript = projectileObj.GetComponent<IProjectile>();
-        damageScript.SetDamage(projectileDamage);
+        damageScript.SetDamage(modifiedDamage);
         ProjectileMovement projectileScript = projectileObj.GetComponent<ProjectileMovement>();
         projectileScript.SetProjectileSpeed(baseProjectileSpeed);
         projectileScript.SetTarget(target);
@@ -168,12 +193,12 @@ public class Turret : MonoBehaviour
 
     private bool CheckTargetIsInRange()
     {
-        return Vector2.Distance(target.position, turretRotationPoint.position) <= targetingRange;
+        return Vector2.Distance(target.position, turretRotationPoint.position) <= (modifiedRange);
     }
 
     private void FindTarget()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(turretRotationPoint.position, targetingRange, enemyMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(turretRotationPoint.position, (modifiedRange), enemyMask);
         if (hits.Length == 0) return;
 
         // en yakýn hedefi seç (daha stabil)
@@ -193,6 +218,6 @@ public class Turret : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, targetingRange);
+        Gizmos.DrawWireSphere(transform.position, (modifiedRange));
     }
 }

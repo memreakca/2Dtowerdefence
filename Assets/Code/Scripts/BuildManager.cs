@@ -8,6 +8,8 @@ public class BuildManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Tower[] towers;
+    [Header("Built Turrets")]
+    public List<Turret> builtTurrets;
 
     private int selectedTower;
 

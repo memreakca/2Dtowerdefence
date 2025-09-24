@@ -15,6 +15,11 @@ public class LevelManager : MonoBehaviour
         main = this;
     }
 
+    public void SetTimeScale(float timeScalte)
+    {
+        Time.timeScale = timeScalte;
+    }
+
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");

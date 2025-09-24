@@ -750,19 +750,25 @@ MonoBehaviour:
   bpsUpgradeFactor: 1.1
   rangeUpgradeFactor: 1.05
   costUpgradeFactor: 2
+  UpgradeCost: 500
   isRotateable: 1
   angleOffset: -90
   rotationSpeed: 235
-  baseBps: 0.75
-  UpgradeCost: 250
   maxTurretLevel: 5
+  baseBps: 0.75
+  baseTargetingRange: 2.5
   baseProjectileDamage: 4
   baseProjectileSpeed: 2.5
-  baseTargetingRange: 2.5
+  projectileDamage: 0
   targetingRange: 2
   bps: 0.9
-  projectileDamage: 0
   TurretLevel: 1
+  bonusDamage: 0
+  bonusRange: 0
+  bonusBps: 0
+  modifiedDamage: 0
+  modifiedRange: 0
+  modifiedBps: 0
   sellCost: 0
 --- !u!95 &6944868429299067754
 Animator:
