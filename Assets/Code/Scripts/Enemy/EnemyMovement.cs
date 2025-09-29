@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,18 +6,27 @@ public class EnemyMovement : MonoBehaviour
 {
     public static EnemyMovement main;
     [Header("References")]
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private SpriteRenderer sr;
-   
+    [SerializeField] public Rigidbody2D rb;
+    [SerializeField] protected SpriteRenderer sr;
+    [SerializeField] protected Animator animator;
+
     [Header("Attiributes")]
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] protected float moveSpeed = 2f;
+    [SerializeField] protected float enemyDamage;
+    [SerializeField] private float attackCooldown = 1f;
+
+    private float attackTimer = 0f;
 
     private int damage = 1;
     private bool isSlowed = false;
-    private float baseSpeed;
+    protected float baseSpeed;
     private Transform target;
-    private int pathIndex = 0;
+    public int pathIndex = 0;
     private Color originalColor;
+    public bool isFighting;
+    public bool isDead;
+
+    public HeroAttributes targetHeroAttributes;
 
 
 
@@ -26,14 +35,31 @@ public class EnemyMovement : MonoBehaviour
         baseSpeed = moveSpeed;
         target = LevelManager.main.path[pathIndex];
         originalColor = GetComponent<SpriteRenderer>().color;
+        OnStartFunction();
+        animator.SetBool("isMoving", true);
     }
-  
+
     private void Update()
     {
+        if (isDead) return;
+
+        if (target == null) return;
+
+        if (targetHeroAttributes != null)
+        {
+            attackTimer -= Time.deltaTime;
+
+            if (attackTimer < 0f)
+            {
+
+                Attack();
+                attackTimer = attackCooldown;
+            }
+        }
+
         if (Vector2.Distance(target.position, transform.position) <= 0.1f)
         {
             pathIndex++;
-            
 
             if (pathIndex == LevelManager.main.path.Length)
             {
@@ -41,25 +67,48 @@ public class EnemyMovement : MonoBehaviour
                 Destroy(gameObject);
                 return;
             }
-            else { 
-               target = LevelManager.main.path[pathIndex];
-                if(target.position.x - transform.position.x >= 0)
-                {
-                    sr.flipX = false;
-                }
-                else
-                {
-                    sr.flipX = true;
-                }
-                   
+            else
+            {
+                target = LevelManager.main.path[pathIndex];
+                sr.flipX = target.position.x - transform.position.x < 0;
+
+                OnPathIndexChanged();
             }
         }
+
+    }
+    protected virtual void OnPathIndexChanged()
+    {
+        // Normal düşman için boş
+    }
+    protected virtual void OnStartFunction()
+    {
+        // Normal düşman için boş
     }
 
+    public void Attack()
+    {
+        Debug.Log("ENEMY ATTACK TRIGERRED");
+        animator.SetBool("isMoving", false);
+        animator.SetTrigger("Attack");
+    }
+    public void DealDamageToHero()
+    {
+        if (!isDead && targetHeroAttributes != null)
+        {
+        targetHeroAttributes.TakeDamage(enemyDamage);
+        }
+    }
+    public void StopMoving()
+    {
+        moveSpeed = 0;
+        isFighting = true;
+        animator.SetBool("isMoving", false);
+    }
     private void FixedUpdate()
     {
+        if (isDead) return;
         Vector2 direction = (target.position - transform.position).normalized;
-
         rb.velocity = direction * moveSpeed;
     }
 
@@ -86,13 +135,34 @@ public class EnemyMovement : MonoBehaviour
         else return;
 
     }
-    private System.Collections.IEnumerator ResetSpeedAfterDelay(float delay)
+    private IEnumerator ResetSpeedAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
 
         GetComponent<SpriteRenderer>().color = originalColor;
-        moveSpeed = baseSpeed;
+        ResetSpeed();
         isSlowed = false;
     }
 
+    public void ResetSpeed()
+    {
+        animator.SetBool("isMoving", true);
+        moveSpeed = baseSpeed;
+        isFighting = false;
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        animator.SetBool("isMoving", false);
+        animator.SetTrigger("Die");
+        rb.velocity = Vector2.zero;
+        this.enabled = false;
+    }
+
+    public void DestroyAnimation()
+    {
+        Destroy(gameObject);
+
+    }
 }

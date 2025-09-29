@@ -750,7 +750,7 @@ MonoBehaviour:
   bpsUpgradeFactor: 1.1
   rangeUpgradeFactor: 1.05
   costUpgradeFactor: 2
-  UpgradeCost: 500
+  UpgradeCost: 800
   isRotateable: 1
   angleOffset: -90
   rotationSpeed: 235

@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour, IProjectile
             return;
         }
         isDone = true;
-        collision2D.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
+        collision2D.gameObject.GetComponent<EnemyHealth>().TakeDamage(bulletDamage);
         Destroy(gameObject);
     }
 

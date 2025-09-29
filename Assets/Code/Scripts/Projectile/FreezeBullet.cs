@@ -26,7 +26,7 @@ public class FreezeBullet : MonoBehaviour , IProjectile
         }
         isDone = true;
 
-        other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
+        other.gameObject.GetComponent<EnemyHealth>().TakeDamage(bulletDamage);
 
         Destroy(gameObject);
 

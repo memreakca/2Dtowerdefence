@@ -12,13 +12,14 @@ public class Plot : MonoBehaviour
 
     private GameObject towerObject;
     public Turret turret;
-  
+
 
     private void OnMouseDown()
     {
-        if (towerObject != null) {
-            
-            return; }
+        if (towerObject != null)
+        {
+            return;
+        }
 
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
         if (towerToBuild.cost > LevelManager.main.currency)
@@ -27,7 +28,7 @@ public class Plot : MonoBehaviour
             return;
 
         }
-        LevelManager.main.SpendCurrency(towerToBuild.cost); 
+        LevelManager.main.SpendCurrency(towerToBuild.cost);
         towerObject = Instantiate(towerToBuild.prefab, towerSpawnPoint.position, Quaternion.identity);
         towerObject.transform.SetParent(this.transform);
         turret = towerObject.GetComponentInChildren<Turret>();

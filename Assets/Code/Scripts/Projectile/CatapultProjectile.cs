@@ -33,7 +33,7 @@ public class CatapultProjectile : MonoBehaviour , IProjectile
 
         foreach (Collider2D hit in hits)
         {
-            if (hit.TryGetComponent<Health>(out var health))
+            if (hit.TryGetComponent<EnemyHealth>(out var health))
             {
                 health.TakeDamage(explosionDamage);
             }

@@ -67,7 +67,7 @@ public class UpgradeManager : MonoBehaviour
         if (rangeUpgradeLevel == maxRangeUpgradeLevel)
             rangeCostText.text = "MAX LEVEL";
         else
-            rangeCostText.text = rangeUpgradeCosts[rangeUpgradeLevel].ToString() +" $" ; 
+            rangeCostText.text = rangeUpgradeCosts[rangeUpgradeLevel].ToString() + " $";
 
 
         bpsUpgradeValueText.text = "BPS Bonus = " + bpsUpgradeValue;
@@ -76,7 +76,7 @@ public class UpgradeManager : MonoBehaviour
         if (bpsUpgradeLevel == maxBPSUpgradeLevel)
             bpsCostText.text = "MAX LEVEL";
         else
-        bpsCostText.text = bpsUpgradeCosts[bpsUpgradeLevel].ToString() + " $";
+            bpsCostText.text = bpsUpgradeCosts[bpsUpgradeLevel].ToString() + " $";
 
 
         damageUpgradeValueText.text = "Damage Bonus = " + damageUpgradeValue;
@@ -90,13 +90,13 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeBPS()
     {
-        if(bpsUpgradeLevel < maxBPSUpgradeLevel)
+        if (bpsUpgradeLevel < maxBPSUpgradeLevel)
         {
             if (LevelManager.main.currency >= bpsUpgradeCosts[bpsUpgradeLevel])
             {
                 LevelManager.main.currency = LevelManager.main.currency - bpsUpgradeCosts[bpsUpgradeLevel];
                 bpsUpgradeValue += 0.3f;
-                bpsUpgradeLevel ++;
+                bpsUpgradeLevel++;
                 UpdateTextsAndBonuses();
             }
         }
@@ -109,7 +109,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 LevelManager.main.currency = LevelManager.main.currency - damageUpgradeCosts[damageUpgradeLevel];
                 damageUpgradeValue += 0.5f;
-                damageUpgradeLevel ++;
+                damageUpgradeLevel++;
                 UpdateTextsAndBonuses();
             }
         }
@@ -121,8 +121,8 @@ public class UpgradeManager : MonoBehaviour
             if (LevelManager.main.currency >= rangeUpgradeCosts[rangeUpgradeLevel])
             {
                 LevelManager.main.currency = LevelManager.main.currency - rangeUpgradeCosts[rangeUpgradeLevel];
-                rangeUpgradeValue += 1;
-                rangeUpgradeLevel ++;
+                rangeUpgradeValue += 0.5f;
+                rangeUpgradeLevel++;
                 UpdateTextsAndBonuses();
             }
         }
