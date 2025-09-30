@@ -136,7 +136,7 @@ public class Turret : MonoBehaviour
         
         animator.speed = modifiedBps / baseBps;
 
-        if (target == null)
+        if (target == null || target.GetComponent<EnemyMovement>().isDead)
         {
             FindTarget();
             return;
