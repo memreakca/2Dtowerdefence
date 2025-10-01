@@ -157,12 +157,9 @@ public class EnemyMovement : MonoBehaviour
         animator.SetBool("isMoving", false);
         animator.SetTrigger("Die");
         rb.velocity = Vector2.zero;
+        float dieAnimLength = animator.GetCurrentAnimatorStateInfo(0).length - 0.05f;
+        Destroy(gameObject, dieAnimLength);
         this.enabled = false;
     }
 
-    public void DestroyAnimation()
-    {
-        Destroy(gameObject);
-
-    }
 }

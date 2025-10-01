@@ -59,7 +59,7 @@ public class UpgradeManager : MonoBehaviour
     {
         foreach (Turret t in BuildManager.main.builtTurrets)
         {
-            t.UpgradedValues();
+            t.ChangeUpgradedValues();
         }
         rangeUpgradeValueText.text = "Range Bonus = " + rangeUpgradeValue;
         rangeUpgradeLevelText.text = "Level = " + rangeUpgradeLevel;
@@ -67,7 +67,7 @@ public class UpgradeManager : MonoBehaviour
         if (rangeUpgradeLevel == maxRangeUpgradeLevel)
             rangeCostText.text = "MAX LEVEL";
         else
-            rangeCostText.text = rangeUpgradeCosts[rangeUpgradeLevel].ToString() + " $";
+            rangeCostText.text = rangeUpgradeCosts[rangeUpgradeLevel].ToString() + "<sprite index= 0>";
 
 
         bpsUpgradeValueText.text = "BPS Bonus = " + bpsUpgradeValue;
@@ -76,7 +76,7 @@ public class UpgradeManager : MonoBehaviour
         if (bpsUpgradeLevel == maxBPSUpgradeLevel)
             bpsCostText.text = "MAX LEVEL";
         else
-            bpsCostText.text = bpsUpgradeCosts[bpsUpgradeLevel].ToString() + " $";
+            bpsCostText.text = bpsUpgradeCosts[bpsUpgradeLevel].ToString() + "<sprite index= 0>";
 
 
         damageUpgradeValueText.text = "Damage Bonus = " + damageUpgradeValue;
@@ -85,7 +85,7 @@ public class UpgradeManager : MonoBehaviour
         if (damageUpgradeLevel == maxDamageUpgradeLevel)
             damageCostText.text = "MAX LEVEL";
         else
-            damageCostText.text = damageUpgradeCosts[damageUpgradeLevel].ToString() + " $";
+            damageCostText.text = damageUpgradeCosts[damageUpgradeLevel].ToString() + "<sprite index= 0>";
 
     }
     public void UpgradeBPS()

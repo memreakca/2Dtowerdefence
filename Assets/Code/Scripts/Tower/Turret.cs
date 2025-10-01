@@ -15,13 +15,13 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject Tower;
     [SerializeField] TextMeshProUGUI UpgradeCostUI;
     [SerializeField] TextMeshProUGUI SellCostUI;
-    [SerializeField] private Transform turretRotationPoint;
+    [SerializeField] private Transform towerRotationPoint;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private Animator animator;
 
-    [Header("UpgradeTurretMultipliers")]
+    [Header("UpgradeTowerMultipliers")]
     [SerializeField] private float bpsUpgradeFactor;
     [SerializeField] private float rangeUpgradeFactor;
     [SerializeField] private float costUpgradeFactor;
@@ -32,8 +32,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private float angleOffset = 0f;
     [SerializeField] private float rotationSpeed = 5f;
 
-    [Header("Turret Attributes")]
-    [SerializeField] private int maxTurretLevel;
+    [Header("Tower Attributes")]
+    [SerializeField] private int maxTowerLevel;
     [SerializeField] private float baseBps;
     [SerializeField] private float baseTargetingRange;
     [SerializeField] private float baseProjectileDamage;
@@ -44,7 +44,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float projectileDamage;
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float bps = 1f; // Bullet per sec
-    [SerializeField] private int TurretLevel = 1;
+    [SerializeField] private int TowerLevel = 1;
 
     [Header("IN-GAME Bonus Attributes")]
 
@@ -69,12 +69,11 @@ public class Turret : MonoBehaviour
 
         targetingRange = baseTargetingRange;
         modifiedRange = targetingRange+bonusRange;
-        UpgradedValues();
+        ChangeUpgradedValues();
     }
 
-    public void UpgradedValues()
+    public void ChangeUpgradedValues()
     {
-        Debug.Log("bps VALUE " + bonusBps);
 
         bonusBps = UpgradeManager.instance.bpsUpgradeValue;
         bonusRange = UpgradeManager.instance.rangeUpgradeValue;
@@ -85,9 +84,9 @@ public class Turret : MonoBehaviour
         modifiedRange = targetingRange + bonusRange;
     }
 
-    public void UpgradeTurret()
+    public void UpgradeTower()
     {
-        if (TurretLevel == maxTurretLevel)
+        if (TowerLevel == maxTowerLevel)
             return; //Debug.Log("It is MAX Level");
         else
         {
@@ -98,8 +97,9 @@ public class Turret : MonoBehaviour
                 bps = bps * bpsUpgradeFactor;
                 targetingRange = targetingRange * rangeUpgradeFactor;
                 UpgradeCost = UpgradeCost * costUpgradeFactor;
-                TurretLevel++;
-
+                TowerLevel++;
+                ChangeUpgradedValues();
+                UpdateUI();
             }
             else return;/*Debug.Log("You Cant Afford This Upgrade");*/
         }
@@ -108,31 +108,26 @@ public class Turret : MonoBehaviour
     private Transform target;
     private float timeUntilFire;
 
-    public void sellTurret()
+    public void sellTower()
     {
         sellCost = UpgradeCost * 0.4f;
         LevelManager.main.currency += sellCost;
         Destroy(Tower);
     }
 
-    
-    private void UpdateUpgradeUI()
+
+    private void UpdateUI()
     {
 
-        if (TurretLevel == maxTurretLevel)
+        if (TowerLevel == maxTowerLevel)
             UpgradeCostUI.text = "MAX LEVEL";
         else
-            UpgradeCostUI.text = "Upgrade Cost= " + UpgradeCost.ToString() + "$" + "\nTurret Level= " + TurretLevel.ToString();
-    }
+            UpgradeCostUI.text = "Upgrade Cost= " + UpgradeCost.ToString() + "<sprite index= 0>" + "\nTower Level= " + TowerLevel.ToString();
 
-    private void UpdateSellCostUI()
-    {
-        SellCostUI.text = "Sell Turret " + (UpgradeCost * 0.4).ToString() + "$";
+        SellCostUI.text = "Sell Tower " + (UpgradeCost * 0.4).ToString() + "<sprite index= 0>";
     }
     void Update()
     {
-        UpdateUpgradeUI();
-        UpdateSellCostUI();
         
         animator.speed = modifiedBps / baseBps;
 
@@ -179,26 +174,26 @@ public class Turret : MonoBehaviour
     {
         if (isRotateable)
         {
-            Vector3 pivot = turretRotationPoint.position;
+            Vector3 pivot = towerRotationPoint.position;
             Vector2 dir = (target.position - pivot);
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + angleOffset; // angleOffset ile sprite yönünü düzelt
             Quaternion desired = Quaternion.Euler(0f, 0f, angle);
-            turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, desired, rotationSpeed * Time.deltaTime);
+            towerRotationPoint.rotation = Quaternion.RotateTowards(towerRotationPoint.rotation, desired, rotationSpeed * Time.deltaTime);
 
             Debug.DrawLine(pivot, target.position, Color.red);
-            Debug.DrawRay(pivot, turretRotationPoint.right * 1f, Color.green);
+            Debug.DrawRay(pivot, towerRotationPoint.right * 1f, Color.green);
         }
     }
 
 
     private bool CheckTargetIsInRange()
     {
-        return Vector2.Distance(target.position, turretRotationPoint.position) <= (modifiedRange);
+        return Vector2.Distance(target.position, towerRotationPoint.position) <= (modifiedRange);
     }
 
     private void FindTarget()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(turretRotationPoint.position, (modifiedRange), enemyMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(towerRotationPoint.position, (modifiedRange), enemyMask);
         if (hits.Length == 0) return;
 
         // en yakýn hedefi seç (daha stabil)
@@ -206,7 +201,7 @@ public class Turret : MonoBehaviour
         Transform closest = null;
         foreach (var c in hits)
         {
-            float d = Vector2.Distance(turretRotationPoint.position, c.transform.position);
+            float d = Vector2.Distance(towerRotationPoint.position, c.transform.position);
             if (d < minDist)
             {
                 minDist = d;

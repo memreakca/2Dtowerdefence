@@ -234,7 +234,7 @@ MonoBehaviour:
   Tower: {fileID: 7683710808863935911}
   UpgradeCostUI: {fileID: 3513690810001559636}
   SellCostUI: {fileID: 895595876712483992}
-  turretRotationPoint: {fileID: 6509105444474322692}
+  towerRotationPoint: {fileID: 6509105444474322692}
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
@@ -248,7 +248,7 @@ MonoBehaviour:
   isRotateable: 1
   angleOffset: -90
   rotationSpeed: 235
-  maxTurretLevel: 6
+  maxTowerLevel: 6
   baseBps: 1.2
   baseTargetingRange: 1.7
   baseProjectileDamage: 3
@@ -256,7 +256,7 @@ MonoBehaviour:
   projectileDamage: 0
   targetingRange: 1.7
   bps: 1.1
-  TurretLevel: 1
+  TowerLevel: 1
   bonusDamage: 0
   bonusRange: 0
   bonusBps: 0

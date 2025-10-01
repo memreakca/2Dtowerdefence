@@ -90,14 +90,12 @@ public class HeroAttributes : MonoBehaviour
     {
         if (enemyMovement != null)
         {
-            Debug.Log("speed resetted");
             enemyMovement.ResetSpeed();
             enemyMovement.targetHeroAttributes = null;
         }
 
         if (!isDead)
         {
-            Debug.Log("öldün");
             isDead = true;
             animator.SetTrigger("Die");
             animator.SetBool("isMoving", false);
@@ -110,7 +108,6 @@ public class HeroAttributes : MonoBehaviour
     }
     public void AttackToTarget()
     {
-        Debug.Log("KNÝGHT ATTACK TRÝGERRED");
         rb.velocity = Vector2.zero;
         animator.SetTrigger("Attack");
         animator.SetBool("isMoving", false);
