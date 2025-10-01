@@ -252,7 +252,7 @@ MonoBehaviour:
   baseBps: 1.2
   baseTargetingRange: 1.7
   baseProjectileDamage: 3
-  baseProjectileSpeed: 3
+  baseProjectileSpeed: 3.3
   projectileDamage: 0
   targetingRange: 1.7
   bps: 1.1

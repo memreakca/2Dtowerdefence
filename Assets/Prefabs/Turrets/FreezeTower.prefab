@@ -1086,8 +1086,8 @@ MonoBehaviour:
   maxTurretLevel: 7
   baseBps: 1.5
   baseTargetingRange: 1.5
-  baseProjectileDamage: 2
-  baseProjectileSpeed: 3
+  baseProjectileDamage: 2.5
+  baseProjectileSpeed: 4
   projectileDamage: 0
   targetingRange: 1.2
   bps: 1.5
