@@ -123,7 +123,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2502094205798059387}
         m_TargetAssemblyTypeName: Turret, Assembly-CSharp
-        m_MethodName: sellTurret
+        m_MethodName: SellTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -939,7 +939,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2502094205798059387}
         m_TargetAssemblyTypeName: Turret, Assembly-CSharp
-        m_MethodName: UpgradeTurret
+        m_MethodName: UpgradeTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,7 +10,7 @@ public class HeroAttributes : MonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected SpriteRenderer sr;
     [SerializeField] protected Animator animator;
-    [SerializeField] public Transform basePosition;
+    [SerializeField] public Vector3 basePosition;
     [SerializeField] private LayerMask enemyMask;
 
     [Header("UI References")]
@@ -18,17 +18,20 @@ public class HeroAttributes : MonoBehaviour
     [SerializeField] private GameObject hpBarCanvas;
 
     [Header("Attributes")]
-    [SerializeField] protected float maxHp;
-    [SerializeField] protected float Hp;
-    [SerializeField] protected float attackDamage;
-    [SerializeField] protected float targetingRange;
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float attackCooldown;
+    [SerializeField] public float maxHp;
+    [SerializeField] public float Hp;
+    [SerializeField] public float attackDamage;
+    [SerializeField] public float targetingRange;
+    [SerializeField] public float moveSpeed;
+    [SerializeField] public float attackCooldown;
 
 
     private Transform target;
     private EnemyMovement enemyMovement;
     private EnemyHealth enemyHealth;
+
+    private HeroTower tower;
+    private Vector3 offset;
 
     private float attackTimer;
     public bool isDead;
@@ -36,7 +39,11 @@ public class HeroAttributes : MonoBehaviour
     {
         Hp = maxHp;
     }
-
+    public void Init(HeroTower t)
+    {
+        tower = t;
+        offset = transform.position - tower.transform.position; 
+    }
     private void Update()
     {
         if (isDead) return;
@@ -48,7 +55,7 @@ public class HeroAttributes : MonoBehaviour
             return;
         }
 
-        if (Vector2.Distance(target.position, transform.position) <= 0.5f)
+        if (Vector2.Distance(target.position, transform.position) <= 0.3f)
         {
             if (enemyMovement != null)
             {
@@ -90,6 +97,7 @@ public class HeroAttributes : MonoBehaviour
     {
         if (enemyMovement != null)
         {
+            tower.targetedEnemies.Remove(enemyMovement);
             enemyMovement.ResetSpeed();
             enemyMovement.targetHeroAttributes = null;
         }
@@ -99,12 +107,20 @@ public class HeroAttributes : MonoBehaviour
             isDead = true;
             animator.SetTrigger("Die");
             animator.SetBool("isMoving", false);
+            float dieAnimLength = animator.GetCurrentAnimatorStateInfo(0).length - 0.05f;
+            tower.QueueHeroForRespawn(this);
+            target = null;
+            Invoke("DisableGameObject", dieAnimLength);
         }
     }
-
-    public void DestroyAnimation()
+    private void OnDisable()
     {
-        Destroy(gameObject);
+        if (enemyMovement != null)
+            tower.targetedEnemies.Remove(enemyMovement);
+    }
+    public void DisbleGameObject()
+    {
+        gameObject.SetActive(false);
     }
     public void AttackToTarget()
     {
@@ -123,13 +139,13 @@ public class HeroAttributes : MonoBehaviour
 
     public void ReturnToBasePosition()
     {
-        Vector2 direction = (basePosition.position - transform.position).normalized;
-        sr.flipX = basePosition.position.x - transform.position.x < 0;
+        Vector2 direction = (basePosition - transform.position).normalized;
+        sr.flipX = basePosition.x - transform.position.x < 0;
         rb.velocity = direction * moveSpeed;
         animator.SetBool("isMoving", true);
 
 
-        if (Vector2.Distance(basePosition.position, transform.position) <= 0.1f)
+        if (Vector2.Distance(basePosition, transform.position) <= 0.1f)
         {
             rb.velocity = Vector2.zero;
             animator.SetBool("isMoving", false);
@@ -145,7 +161,7 @@ public class HeroAttributes : MonoBehaviour
     }
     private void FindTarget()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(basePosition.position, targetingRange, enemyMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(basePosition, targetingRange, enemyMask);
         if (hits.Length == 0) return;
 
         // en yakýn hedefi seç (daha stabil)
@@ -153,7 +169,10 @@ public class HeroAttributes : MonoBehaviour
         Transform closest = null;
         foreach (var c in hits)
         {
-            float d = Vector2.Distance(basePosition.position, c.transform.position);
+            var enemy = c.GetComponent<EnemyMovement>();
+            if (enemy == null || tower.targetedEnemies.Contains(enemy) || enemy.isDead) continue;
+
+            float d = Vector2.Distance(basePosition, c.transform.position);
             if (d < minDist)
             {
                 minDist = d;
@@ -161,11 +180,13 @@ public class HeroAttributes : MonoBehaviour
             }
         }
 
-        if (closest != null)
+
+        if (closest != null )
         {
             target = closest;
             enemyMovement = target.GetComponent<EnemyMovement>();
             enemyHealth = target.GetComponent<EnemyHealth>();
+            tower.targetedEnemies.Add(enemyMovement);
         }
     }
 

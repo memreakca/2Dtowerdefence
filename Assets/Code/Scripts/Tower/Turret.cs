@@ -69,6 +69,7 @@ public class Turret : MonoBehaviour
 
         targetingRange = baseTargetingRange;
         modifiedRange = targetingRange+bonusRange;
+        UpdateUI();
         ChangeUpgradedValues();
     }
 
@@ -108,7 +109,7 @@ public class Turret : MonoBehaviour
     private Transform target;
     private float timeUntilFire;
 
-    public void sellTower()
+    public void SellTower()
     {
         sellCost = UpgradeCost * 0.4f;
         LevelManager.main.currency += sellCost;

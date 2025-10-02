@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager main;
 
     public Transform startPoint;
     public Transform[] path;
+    public Tilemap pathTileMap;
 
     public float currency;
     private void Awake()

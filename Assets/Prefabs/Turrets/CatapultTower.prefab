@@ -391,7 +391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4888544928700328071}
         m_TargetAssemblyTypeName: Turret, Assembly-CSharp
-        m_MethodName: UpgradeTurret
+        m_MethodName: UpgradeTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -747,10 +747,10 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5848697185760695170, guid: e0448a7c28daaf3448b9cd3c2fa25724, type: 3}
   firingPoint: {fileID: 7328907838252257122}
   animator: {fileID: 6944868429299067754}
-  bpsUpgradeFactor: 1.1
+  bpsUpgradeFactor: 1.05
   rangeUpgradeFactor: 1.05
   costUpgradeFactor: 2
-  UpgradeCost: 800
+  UpgradeCost: 1000
   isRotateable: 1
   angleOffset: -90
   rotationSpeed: 235
@@ -1080,7 +1080,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4888544928700328071}
         m_TargetAssemblyTypeName: Turret, Assembly-CSharp
-        m_MethodName: sellTurret
+        m_MethodName: SellTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
