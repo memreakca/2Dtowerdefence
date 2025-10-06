@@ -24,6 +24,7 @@ public class NecomancerBoss : EnemyMovement
         }
 
         Invoke("ResetSpeed", 2f);
+        
     }
 
     

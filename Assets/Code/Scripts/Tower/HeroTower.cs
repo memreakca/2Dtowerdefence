@@ -69,7 +69,7 @@ public class HeroTower : MonoBehaviour
 
     private void Start()
     {
-        pathTilemap = LevelManager.main.pathTileMap;
+        pathTilemap = PathManager.main.pathTileMap;
         heroDamage = baseHeroDamage;
         modifiedHeroDamage = heroDamage + bonusHeroDamage;
 
@@ -102,9 +102,9 @@ public class HeroTower : MonoBehaviour
     {
         if (TowerLevel == maxTowerLevel)
             return;
-        if (LevelManager.main.currency >= UpgradeCost)
+        if (PathManager.main.currency >= UpgradeCost)
         {
-            LevelManager.main.currency -= UpgradeCost;
+            PathManager.main.currency -= UpgradeCost;
             heroAttackSpeed *= heroAttackSpeedUpgradeFactor;
             heroDamage *= heroDamageUpgradeFactor;
             maxHeroNumber += heroNumberUpgradeFactor;
@@ -165,7 +165,7 @@ public class HeroTower : MonoBehaviour
     public void SellTower()
     {
         sellCost = UpgradeCost * 0.4f;
-        LevelManager.main.currency += sellCost;
+        PathManager.main.currency += sellCost;
         Destroy(Tower);
     }
 

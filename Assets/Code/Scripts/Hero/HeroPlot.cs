@@ -20,13 +20,13 @@ public class HeroPlot : MonoBehaviour
         }
 
         Hero heroToSpawn = BuildManager.main.GetSelectedHero();
-        if (heroToSpawn.cost > LevelManager.main.currency)
+        if (heroToSpawn.cost > PathManager.main.currency)
         {
             Debug.Log("You cant afford this tower");
             return;
 
         }
-        LevelManager.main.SpendCurrency(heroToSpawn.cost);
+        PathManager.main.SpendCurrency(heroToSpawn.cost);
         heroObject = Instantiate(heroToSpawn.prefab, HeroSpawnPoint.position, Quaternion.identity);
         heroObject.transform.SetParent(this.transform);
         sr.enabled = false;

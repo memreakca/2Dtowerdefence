@@ -33,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         baseSpeed = moveSpeed;
-        target = LevelManager.main.path[pathIndex];
+        target = PathManager.main.path[pathIndex];
         originalColor = GetComponent<SpriteRenderer>().color;
         OnStartFunction();
         animator.SetBool("isMoving", true);
@@ -61,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
         {
             pathIndex++;
 
-            if (pathIndex == LevelManager.main.path.Length)
+            if (pathIndex == PathManager.main.path.Length)
             {
                 EnemySpawner.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
@@ -69,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                target = LevelManager.main.path[pathIndex];
+                target = PathManager.main.path[pathIndex];
                 sr.flipX = target.position.x - transform.position.x < 0;
 
                 OnPathIndexChanged();

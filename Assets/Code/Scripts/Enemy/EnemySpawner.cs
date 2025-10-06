@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (currentWave == maxWaveIndex && !isBossSpawned)
         {
-            Instantiate(bossPrefab, LevelManager.main.startPoint.position, Quaternion.identity);
+            Instantiate(bossPrefab, PathManager.main.startPoint.position, Quaternion.identity);
             enemiesAlive = 1;
             isBossSpawned = true;
             isSpawning = false;
@@ -101,7 +101,7 @@ public class EnemySpawner : MonoBehaviour
     {
         //if (currentWave == maxWaveIndex)
         //{
-        //    Instantiate(bossPrefab, LevelManager.main.startPoint.position, Quaternion.identity);
+        //    Instantiate(bossPrefab, PathManager.main.startPoint.position, Quaternion.identity);
         //    enemiesAlive = 1;
         //    return;
         //}
@@ -116,7 +116,7 @@ public class EnemySpawner : MonoBehaviour
         else enemy = 4;
 
         GameObject prefabToSpawn = enemyPrefabs[enemy];
-        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+        Instantiate(prefabToSpawn, PathManager.main.startPoint.position, Quaternion.identity);
 
     }
     private int EnemiesPerWave()

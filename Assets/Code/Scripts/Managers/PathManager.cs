@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-public class LevelManager : MonoBehaviour
+public class PathManager : MonoBehaviour
 {
-    public static LevelManager main;
+    public static PathManager main;
 
     public Transform startPoint;
     public Transform[] path;
@@ -17,15 +17,6 @@ public class LevelManager : MonoBehaviour
         main = this;
     }
 
-    public void SetTimeScale(float timeScalte)
-    {
-        Time.timeScale = timeScalte;
-    }
-
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
     private void Start()
     {
        currency = 200;

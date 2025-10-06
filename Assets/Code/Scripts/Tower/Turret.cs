@@ -92,9 +92,9 @@ public class Turret : MonoBehaviour
         else
         {
 
-            if (LevelManager.main.currency >= UpgradeCost)
+            if (PathManager.main.currency >= UpgradeCost)
             {
-                LevelManager.main.currency = LevelManager.main.currency - UpgradeCost;
+                PathManager.main.currency = PathManager.main.currency - UpgradeCost;
                 bps = bps * bpsUpgradeFactor;
                 targetingRange = targetingRange * rangeUpgradeFactor;
                 UpgradeCost = UpgradeCost * costUpgradeFactor;
@@ -112,7 +112,7 @@ public class Turret : MonoBehaviour
     public void SellTower()
     {
         sellCost = UpgradeCost * 0.4f;
-        LevelManager.main.currency += sellCost;
+        PathManager.main.currency += sellCost;
         Destroy(Tower);
     }
 

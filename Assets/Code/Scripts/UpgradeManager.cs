@@ -92,9 +92,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (bpsUpgradeLevel < maxBPSUpgradeLevel)
         {
-            if (LevelManager.main.currency >= bpsUpgradeCosts[bpsUpgradeLevel])
+            if (PathManager.main.currency >= bpsUpgradeCosts[bpsUpgradeLevel])
             {
-                LevelManager.main.currency = LevelManager.main.currency - bpsUpgradeCosts[bpsUpgradeLevel];
+                PathManager.main.currency = PathManager.main.currency - bpsUpgradeCosts[bpsUpgradeLevel];
                 bpsUpgradeValue += 0.3f;
                 bpsUpgradeLevel++;
                 UpdateTextsAndBonuses();
@@ -105,9 +105,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (damageUpgradeLevel < maxDamageUpgradeLevel)
         {
-            if (LevelManager.main.currency >= damageUpgradeCosts[damageUpgradeLevel])
+            if (PathManager.main.currency >= damageUpgradeCosts[damageUpgradeLevel])
             {
-                LevelManager.main.currency = LevelManager.main.currency - damageUpgradeCosts[damageUpgradeLevel];
+                PathManager.main.currency = PathManager.main.currency - damageUpgradeCosts[damageUpgradeLevel];
                 damageUpgradeValue += 0.5f;
                 damageUpgradeLevel++;
                 UpdateTextsAndBonuses();
@@ -118,9 +118,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (rangeUpgradeLevel < maxRangeUpgradeLevel)
         {
-            if (LevelManager.main.currency >= rangeUpgradeCosts[rangeUpgradeLevel])
+            if (PathManager.main.currency >= rangeUpgradeCosts[rangeUpgradeLevel])
             {
-                LevelManager.main.currency = LevelManager.main.currency - rangeUpgradeCosts[rangeUpgradeLevel];
+                PathManager.main.currency = PathManager.main.currency - rangeUpgradeCosts[rangeUpgradeLevel];
                 rangeUpgradeValue += 0.5f;
                 rangeUpgradeLevel++;
                 UpdateTextsAndBonuses();
