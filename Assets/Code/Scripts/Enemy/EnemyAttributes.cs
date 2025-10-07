@@ -28,8 +28,14 @@ public class EnemyAttributes : MonoBehaviour
 
     public HeroAttributes targetHeroAttributes;
 
-
-
+    private void OnEnable()
+    {
+        GameEvents.OnEnemyDie += Die;
+    }
+    private void OnDisable()
+    {
+        GameEvents.OnEnemyDie -= Die;
+    }
     private void Start()
     {
         baseSpeed = moveSpeed;
@@ -63,7 +69,6 @@ public class EnemyAttributes : MonoBehaviour
 
             if (pathIndex == PathManager.main.path.Length)
             {
-                EnemySpawner.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
                 return;
             }
@@ -95,7 +100,7 @@ public class EnemyAttributes : MonoBehaviour
     {
         if (!isDead && targetHeroAttributes != null)
         {
-        targetHeroAttributes.TakeDamage(enemyDamage);
+            targetHeroAttributes.TakeDamage(enemyDamage);
         }
     }
     public void StopMoving()
@@ -149,15 +154,18 @@ public class EnemyAttributes : MonoBehaviour
         isFighting = false;
     }
 
-    public void Die()
+    public void Die(EnemyAttributes enemy)
     {
-        isDead = true;
-        animator.SetBool("isMoving", false);
-        animator.SetTrigger("Die");
-        rb.velocity = Vector2.zero;
-        float dieAnimLength = animator.GetCurrentAnimatorStateInfo(0).length - 0.05f;
-        Destroy(gameObject, dieAnimLength);
-        this.enabled = false;
+        if (enemy == this)
+        {
+            isDead = true;
+            animator.SetBool("isMoving", false);
+            animator.SetTrigger("Die");
+            rb.velocity = Vector2.zero;
+            float dieAnimLength = animator.GetCurrentAnimatorStateInfo(0).length - 0.05f;
+            Destroy(gameObject, dieAnimLength);
+            this.enabled = false;
+        }
     }
 
 }

@@ -39,8 +39,8 @@ public class EnemyHealth : MonoBehaviour
         {
             EnemySpawner.onEnemyDestroy.Invoke();
             GameEvents.CurrencyGathered(currencyWorth);
+            GameEvents.EnemyDied(GetComponent<EnemyAttributes>());
             isDestroyed = true;
-            gameObject.GetComponent<EnemyAttributes>().Die();
         }
     }
 

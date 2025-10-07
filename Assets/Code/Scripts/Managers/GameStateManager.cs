@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,19 +18,27 @@ public class GameStateManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] public float maxBaseHP = 10;
     [SerializeField] public float baseHP;
-    [SerializeField] public float currency;
     [SerializeField] private float startCurrency;
+    public float currency;
+
     private int enemiesAlive;
 
+    private List<EnemyAttributes> activeEnemies = new();
     private void OnEnable()
     {
         GameEvents.OnEnemyEnterBase += TakeDamage;
         GameEvents.OnCurrencyGathered += IncreaseCurrency;
         GameEvents.OnCurrencySpend += SpendCurrency;
+        GameEvents.OnEnemySpawn += OnEnemySpawned;
+        GameEvents.OnEnemyDie += OnEnemyDied;
     }
     private void OnDisable()
     {
         GameEvents.OnEnemyEnterBase -= TakeDamage;
+        GameEvents.OnCurrencyGathered -= IncreaseCurrency;
+        GameEvents.OnCurrencySpend -= SpendCurrency;
+        GameEvents.OnEnemySpawn -= OnEnemySpawned;
+        GameEvents.OnEnemyDie -= OnEnemyDied;
     }
     private void Start()
     {
@@ -48,14 +57,22 @@ public class GameStateManager : MonoBehaviour
         baseHpFillBar.fillAmount = baseHP / maxBaseHP;
 
     }
+    private void OnEnemySpawned(EnemyAttributes enemy)
+    {
+        activeEnemies.Add(enemy);
+        enemiesAlive++;
+    }
 
+    private void OnEnemyDied(EnemyAttributes enemy)
+    {
+        activeEnemies.Remove(enemy);
+        enemiesAlive--;
+    }
     public void TakeDamage(int dmg)
     {
 
         baseHP -= dmg;
         UpdateBaseHp();
-
-        EnemySpawner.main.EnemyDestroyed();
 
         if (baseHP <= 0)
         {

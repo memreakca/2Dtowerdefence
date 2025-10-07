@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class WaveManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] TextMeshProUGUI waveUI;
+    [SerializeField] private GameObject forceStartWaveObject;
+    [SerializeField] private Image cooldownFillImage;
 
     [Header("Wave Attributes")]
     public float spawnInterval;
@@ -34,33 +37,57 @@ public class WaveManager : MonoBehaviour
     private IEnumerator StartNextWave()
     {
         UpdateWaveUI();
-        if (currentWaveIndex >= waves.Count)
-        {
-            Debug.Log("Tüm dalgalar tamamlandý.");
-            yield break;
-        }
+
+        isSpawning = true;
+        forceStartWaveObject.SetActive(false);
 
         Wave wave = waves[currentWaveIndex];
-        isSpawning = true;
 
         // Her düþman grubunu sýrayla spawnla
         foreach (WaveIndex waveIndex in wave.waveIndexes)
         {
             for (int i = 0; i < waveIndex.count; i++)
             {
-                Instantiate(waveIndex.enemyPrefab, pathManager.startPoint.position, Quaternion.identity);
+                var Enemy = Instantiate(waveIndex.enemyPrefab, pathManager.startPoint.position, Quaternion.identity);
+                GameEvents.EnemySpawned(Enemy.GetComponent<EnemyAttributes>());
                 yield return new WaitForSeconds(spawnInterval);
             }
         }
 
-        isSpawning = false;
         currentWaveIndex++;
 
-        yield return new WaitForSeconds(timeBetweenWaves);
+        if (currentWaveIndex < waves.Count)
+        {
 
-        StartCoroutine(StartNextWave());
+            yield return StartCoroutine(WaveCooldownRoutine(timeBetweenWaves));
+
+            yield return new WaitForSeconds(timeBetweenWaves);
+
+            StartCoroutine(StartNextWave());
+        }
+
 
     }
+    private IEnumerator WaveCooldownRoutine(float duration)
+    {
+        forceStartWaveObject.SetActive(true);
+
+        float timer = 0f;
+        cooldownFillImage.fillAmount = 1f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            cooldownFillImage.fillAmount = 1f - (timer / duration);
+            yield return null;
+        }
+
+        cooldownFillImage.fillAmount = 0f;
+
+        forceStartWaveObject.SetActive(false);
+
+    }
+
 
     public void ForceStartNextWave()
     {
@@ -91,6 +118,6 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateWaveUI()
     {
-        waveUI.text = "Wave Number : " + (currentWaveIndex+1).ToString();
+        waveUI.text = "Wave Number : " + (currentWaveIndex + 1).ToString();
     }
 }

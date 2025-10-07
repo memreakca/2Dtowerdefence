@@ -13,6 +13,10 @@ public class GameEvents : MonoBehaviour
     public static event CurrencyEventHandler OnCurrencyGathered;
     public static event CurrencyEventHandler OnCurrencySpend;
 
+    public delegate void EnemyEventHandler(EnemyAttributes enemy);
+    public static event EnemyEventHandler OnEnemySpawn;
+    public static event EnemyEventHandler OnEnemyDie;
+
     public static void EnemyEnteredBase(int dmg)
     {
         OnEnemyEnterBase?.Invoke(dmg);
@@ -25,5 +29,14 @@ public class GameEvents : MonoBehaviour
     public static void CurrencySpend(float quantity)
     {
         OnCurrencySpend?.Invoke(quantity);
+    }
+    public static void EnemySpawned(EnemyAttributes enemy)
+    {
+        OnEnemySpawn?.Invoke(enemy);
+    }
+
+    public static void EnemyDied(EnemyAttributes enemy)
+    {
+        OnEnemyDie?.Invoke(enemy);
     }
 }
