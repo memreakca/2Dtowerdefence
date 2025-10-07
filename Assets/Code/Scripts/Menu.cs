@@ -20,7 +20,7 @@ public class Menu : MonoBehaviour
 
     private void OnGUI()
     {
-        currencyUI.text = PathManager.main.currency.ToString() + "<sprite index= 0>";
+        currencyUI.text = GameStateManager.Instance.currency.ToString() + "<sprite index= 0>";
         
     }
 

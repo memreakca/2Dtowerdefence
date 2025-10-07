@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NecroSkeleton : EnemyMovement
+public class NecroSkeleton : EnemyAttributes
 {
     protected override void OnStartFunction()
     {

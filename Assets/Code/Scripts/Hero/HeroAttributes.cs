@@ -27,7 +27,7 @@ public class HeroAttributes : MonoBehaviour
 
 
     private Transform target;
-    private EnemyMovement enemyMovement;
+    private EnemyAttributes enemyAttributes;
     private EnemyHealth enemyHealth;
 
     private HeroTower tower;
@@ -57,10 +57,10 @@ public class HeroAttributes : MonoBehaviour
 
         if (Vector2.Distance(target.position, transform.position) <= 0.3f)
         {
-            if (enemyMovement != null)
+            if (enemyAttributes != null)
             {
-                enemyMovement.targetHeroAttributes = this;
-                enemyMovement.StopMoving();
+                enemyAttributes.targetHeroAttributes = this;
+                enemyAttributes.StopMoving();
             }
 
             // Cooldown dolduysa saldýr
@@ -95,11 +95,11 @@ public class HeroAttributes : MonoBehaviour
 
     public void Die()
     {
-        if (enemyMovement != null)
+        if (enemyAttributes != null)
         {
-            tower.targetedEnemies.Remove(enemyMovement);
-            enemyMovement.ResetSpeed();
-            enemyMovement.targetHeroAttributes = null;
+            tower.targetedEnemies.Remove(enemyAttributes);
+            enemyAttributes.ResetSpeed();
+            enemyAttributes.targetHeroAttributes = null;
         }
 
         if (!isDead)
@@ -115,8 +115,8 @@ public class HeroAttributes : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (enemyMovement != null)
-            tower.targetedEnemies.Remove(enemyMovement);
+        if (enemyAttributes != null)
+            tower.targetedEnemies.Remove(enemyAttributes);
     }
     public void DisbleGameObject()
     {
@@ -169,7 +169,7 @@ public class HeroAttributes : MonoBehaviour
         Transform closest = null;
         foreach (var c in hits)
         {
-            var enemy = c.GetComponent<EnemyMovement>();
+            var enemy = c.GetComponent<EnemyAttributes>();
             if (enemy == null || tower.targetedEnemies.Contains(enemy) || enemy.isDead) continue;
 
             float d = Vector2.Distance(basePosition, c.transform.position);
@@ -184,9 +184,9 @@ public class HeroAttributes : MonoBehaviour
         if (closest != null )
         {
             target = closest;
-            enemyMovement = target.GetComponent<EnemyMovement>();
+            enemyAttributes = target.GetComponent<EnemyAttributes>();
             enemyHealth = target.GetComponent<EnemyHealth>();
-            tower.targetedEnemies.Add(enemyMovement);
+            tower.targetedEnemies.Add(enemyAttributes);
         }
     }
 

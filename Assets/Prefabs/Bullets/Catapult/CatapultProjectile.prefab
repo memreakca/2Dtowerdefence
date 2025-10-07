@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5848697185760695172}
   - component: {fileID: 5848697185760695171}
   - component: {fileID: 492588981188280993}
-  - component: {fileID: -4987903082122837087}
   - component: {fileID: 1836311908639689829}
   - component: {fileID: 6763529680460649122}
   m_Layer: 7
@@ -115,22 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-4987903082122837087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5848697185760695170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e63507d9bcd28314cb15a2e4dcb58442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCurvedShoot: 0
-  arcHeight: 2
-  rb: {fileID: 492588981188280993}
-  bulletSpeed: 2.5
 --- !u!114 &1836311908639689829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fadd1dd8f97064eb87c9b5722e74fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 492588981188280993}
+  projectileSpeed: 2
   explosionDamage: 4
   explosionRadius: 0.3
   explosionPrefab: {fileID: 5848697185760695170, guid: 4bfdde9865280944fb454736c14ebee1, type: 3}

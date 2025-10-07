@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NecomancerBoss : EnemyMovement
+public class NecomancerBoss : EnemyAttributes
 {
     [Header("References")]
     [SerializeField] private GameObject enemyPrefab;
@@ -20,7 +20,7 @@ public class NecomancerBoss : EnemyMovement
         foreach (Transform t in summonPoints)
         {
             var spawnedEnemy = Instantiate(enemyPrefab,t.position,Quaternion.identity);
-            spawnedEnemy.GetComponent<EnemyMovement>().pathIndex = this.pathIndex;
+            spawnedEnemy.GetComponent<EnemyAttributes>().pathIndex = this.pathIndex;
         }
 
         Invoke("ResetSpeed", 2f);

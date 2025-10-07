@@ -374,6 +374,7 @@ MonoBehaviour:
   moveSpeed: 0.3
   enemyDamage: 10
   attackCooldown: 3
+  damageToBase: 11
   pathIndex: 0
   isFighting: 0
   isDead: 0

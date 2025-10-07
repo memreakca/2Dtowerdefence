@@ -62,6 +62,33 @@ public class WaveManager : MonoBehaviour
 
     }
 
+    public void ForceStartNextWave()
+    {
+        if (currentWaveIndex >= waves.Count)
+        {
+            Debug.Log("Tüm dalgalar tamamlandý, yeni dalga yok.");
+            return;
+        }
+
+        // Sonraki dalgadaki toplam düþman sayýsýný hesapla
+        int totalEnemiesNextWave = 0;
+        foreach (var waveIndex in waves[currentWaveIndex].waveIndexes)
+        {
+            totalEnemiesNextWave += waveIndex.count;
+        }
+
+        // Ödül miktarýný belirle (örneðin her düþman baþýna 5 altýn)
+        int reward = totalEnemiesNextWave * 5;
+
+        // Oyuncuya ödül ver (örnek: GameManager üzerinden)
+        GameEvents.CurrencyGathered(reward);
+        Debug.Log($"Sonraki dalga için {reward} altýn verildi ({totalEnemiesNextWave} düþman).");
+
+        // Beklemeden sonraki dalgayý baþlat
+        StopAllCoroutines(); // Eðer mevcut coroutine beklemede ise iptal et
+        StartCoroutine(StartNextWave());
+    }
+
     private void UpdateWaveUI()
     {
         waveUI.text = "Wave Number : " + (currentWaveIndex+1).ToString();

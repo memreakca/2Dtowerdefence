@@ -30,7 +30,7 @@ public class FreezeBullet : MonoBehaviour , IProjectile
 
         Destroy(gameObject);
 
-        EnemyMovement enemy = other.gameObject.GetComponent<EnemyMovement>();
+        EnemyAttributes enemy = other.gameObject.GetComponent<EnemyAttributes>();
         enemy.ApplySlow(slowFactor, FreezeTime);
         
     }

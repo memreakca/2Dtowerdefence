@@ -65,7 +65,7 @@ public class HeroTower : MonoBehaviour
 
     private Transform currentSpawnPoint;
     private List<GameObject> spawnedHeroes = new List<GameObject>();
-    public  HashSet<EnemyMovement> targetedEnemies = new HashSet<EnemyMovement>();
+    public  HashSet<EnemyAttributes> targetedEnemies = new HashSet<EnemyAttributes>();
 
     private void Start()
     {
@@ -102,9 +102,9 @@ public class HeroTower : MonoBehaviour
     {
         if (TowerLevel == maxTowerLevel)
             return;
-        if (PathManager.main.currency >= UpgradeCost)
+        if (GameStateManager.Instance.currency >= UpgradeCost)
         {
-            PathManager.main.currency -= UpgradeCost;
+            GameEvents.CurrencySpend(UpgradeCost);
             heroAttackSpeed *= heroAttackSpeedUpgradeFactor;
             heroDamage *= heroDamageUpgradeFactor;
             maxHeroNumber += heroNumberUpgradeFactor;
@@ -165,7 +165,7 @@ public class HeroTower : MonoBehaviour
     public void SellTower()
     {
         sellCost = UpgradeCost * 0.4f;
-        PathManager.main.currency += sellCost;
+        GameEvents.CurrencyGathered(sellCost);
         Destroy(Tower);
     }
 

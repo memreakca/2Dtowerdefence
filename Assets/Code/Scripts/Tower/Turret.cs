@@ -92,9 +92,9 @@ public class Turret : MonoBehaviour
         else
         {
 
-            if (PathManager.main.currency >= UpgradeCost)
+            if (GameStateManager.Instance.currency >= UpgradeCost)
             {
-                PathManager.main.currency = PathManager.main.currency - UpgradeCost;
+                GameEvents.CurrencySpend(UpgradeCost);
                 bps = bps * bpsUpgradeFactor;
                 targetingRange = targetingRange * rangeUpgradeFactor;
                 UpgradeCost = UpgradeCost * costUpgradeFactor;
@@ -112,7 +112,7 @@ public class Turret : MonoBehaviour
     public void SellTower()
     {
         sellCost = UpgradeCost * 0.4f;
-        PathManager.main.currency += sellCost;
+        GameEvents.CurrencyGathered(sellCost);
         Destroy(Tower);
     }
 
@@ -132,7 +132,7 @@ public class Turret : MonoBehaviour
         
         animator.speed = modifiedBps / baseBps;
 
-        if (target == null || target.GetComponent<EnemyMovement>().isDead)
+        if (target == null || target.GetComponent<EnemyAttributes>().isDead)
         {
             FindTarget();
             return;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyAttributes : MonoBehaviour
 {
-    public static EnemyMovement main;
+    public static EnemyAttributes main;
     [Header("References")]
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] protected SpriteRenderer sr;
@@ -14,10 +14,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] protected float moveSpeed = 2f;
     [SerializeField] protected float enemyDamage;
     [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private int damageToBase = 1;
 
     private float attackTimer = 0f;
 
-    private int damage = 1;
     private bool isSlowed = false;
     protected float baseSpeed;
     private Transform target;
@@ -88,7 +88,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("ENEMY ATTACK TRIGERRED");
         animator.SetBool("isMoving", false);
         animator.SetTrigger("Attack");
     }
@@ -126,10 +125,9 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent<Base>(out var basee))
+        if (other.gameObject.CompareTag("Base"))
         {
-
-            basee.TakeDamage(damage);
+            GameEvents.EnemyEnteredBase(damageToBase);
             Destroy(gameObject);
         }
         else return;

@@ -22,13 +22,13 @@ public class Plot : MonoBehaviour
         }
 
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
-        if (towerToBuild.cost > PathManager.main.currency)
+        if (towerToBuild.cost > GameStateManager.Instance.currency)
         {
             Debug.Log("You cant afford this tower");
             return;
 
         }
-        PathManager.main.SpendCurrency(towerToBuild.cost);
+        GameEvents.CurrencySpend(towerToBuild.cost);
         towerObject = Instantiate(towerToBuild.prefab, towerSpawnPoint.position, Quaternion.identity);
         towerObject.transform.SetParent(this.transform);
         turret = towerObject.GetComponentInChildren<Turret>();

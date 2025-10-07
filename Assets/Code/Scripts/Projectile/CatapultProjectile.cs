@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatapultProjectile : MonoBehaviour , IProjectile
+public class CatapultProjectile : ProjectileMovement , IProjectile
 {
     [Header("Attributes")]
     [SerializeField] private float explosionDamage = 3f;

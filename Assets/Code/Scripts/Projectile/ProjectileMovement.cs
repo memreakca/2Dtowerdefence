@@ -31,13 +31,8 @@ public class ProjectileMovement : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void FixedUpdate()
+    protected void ProjectileMove()
     {
-
-        if (!target)
-        {
-            return;
-        }
         Vector2 direction = (target.position - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 85f;
@@ -45,6 +40,15 @@ public class ProjectileMovement : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         rb.velocity = direction * projectileSpeed;
+    }
+    private void FixedUpdate()
+    {
+
+        if (!target)
+        {
+            return;
+        }
+        ProjectileMove(); 
 
     }
 

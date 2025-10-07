@@ -92,9 +92,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (bpsUpgradeLevel < maxBPSUpgradeLevel)
         {
-            if (PathManager.main.currency >= bpsUpgradeCosts[bpsUpgradeLevel])
+            if (GameStateManager.Instance.currency >= bpsUpgradeCosts[bpsUpgradeLevel])
             {
-                PathManager.main.currency = PathManager.main.currency - bpsUpgradeCosts[bpsUpgradeLevel];
+                GameEvents.CurrencySpend(bpsUpgradeCosts[bpsUpgradeLevel]);
                 bpsUpgradeValue += 0.3f;
                 bpsUpgradeLevel++;
                 UpdateTextsAndBonuses();
@@ -105,9 +105,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (damageUpgradeLevel < maxDamageUpgradeLevel)
         {
-            if (PathManager.main.currency >= damageUpgradeCosts[damageUpgradeLevel])
+            if (GameStateManager.Instance.currency >= damageUpgradeCosts[damageUpgradeLevel])
             {
-                PathManager.main.currency = PathManager.main.currency - damageUpgradeCosts[damageUpgradeLevel];
+                GameEvents.CurrencySpend(damageUpgradeCosts[damageUpgradeLevel]);
                 damageUpgradeValue += 0.5f;
                 damageUpgradeLevel++;
                 UpdateTextsAndBonuses();
@@ -118,9 +118,9 @@ public class UpgradeManager : MonoBehaviour
     {
         if (rangeUpgradeLevel < maxRangeUpgradeLevel)
         {
-            if (PathManager.main.currency >= rangeUpgradeCosts[rangeUpgradeLevel])
+            if (GameStateManager.Instance.currency >= rangeUpgradeCosts[rangeUpgradeLevel])
             {
-                PathManager.main.currency = PathManager.main.currency - rangeUpgradeCosts[rangeUpgradeLevel];
+                GameEvents.CurrencySpend(rangeUpgradeCosts[rangeUpgradeLevel]);
                 rangeUpgradeValue += 0.5f;
                 rangeUpgradeLevel++;
                 UpdateTextsAndBonuses();
