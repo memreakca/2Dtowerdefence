@@ -90,8 +90,8 @@ public class HeroTower : MonoBehaviour
 
     public void ChangeUpgradedValues()
     {
-        bonusHeroAttackSpeed = UpgradeManager.instance.bpsUpgradeValue;
-        bonusHeroDamage = UpgradeManager.instance.damageUpgradeValue;
+        bonusHeroAttackSpeed = UserManager.Instance.bonusBps; 
+        bonusHeroDamage = UserManager.Instance.bonusDamage;
 
         modifiedHeroDamage = heroDamage + bonusHeroDamage;
         modifiedHeroAttackSpeed = heroAttackSpeed + bonusHeroAttackSpeed;

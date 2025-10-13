@@ -29,8 +29,8 @@ public class Turret : MonoBehaviour
 
     [Header("General Attributes")]
     [SerializeField] private bool isRotateable = false;
-    [SerializeField] private float angleOffset = 0f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float angleOffset;
+    [SerializeField] private float rotationSpeed;
 
     [Header("Tower Attributes")]
     [SerializeField] private int maxTowerLevel;
@@ -42,9 +42,9 @@ public class Turret : MonoBehaviour
 
     [Header("IN-GAME Base Attributes")]
     [SerializeField] private float projectileDamage;
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private float bps = 1f; // Bullet per sec
-    [SerializeField] private int TowerLevel = 1;
+    [SerializeField] private float targetingRange;
+    [SerializeField] private float bps; 
+    [SerializeField] private int TowerLevel;
 
     [Header("IN-GAME Bonus Attributes")]
 
@@ -76,9 +76,9 @@ public class Turret : MonoBehaviour
     public void ChangeUpgradedValues()
     {
 
-        bonusBps = UpgradeManager.instance.bpsUpgradeValue;
-        bonusRange = UpgradeManager.instance.rangeUpgradeValue;
-        bonusDamage = UpgradeManager.instance.damageUpgradeValue;
+        bonusBps = UserManager.Instance.bonusBps;
+        bonusRange = UserManager.Instance.bonusRange;
+        bonusDamage = UserManager.Instance.bonusDamage;
 
         modifiedDamage = projectileDamage + bonusDamage;
         modifiedBps = bps + bonusBps;

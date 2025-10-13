@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeBullet : MonoBehaviour , IProjectile
+public class FreezeBullet : ProjectileMovement , IProjectile
 {
 
     [Header("Attributes")]
