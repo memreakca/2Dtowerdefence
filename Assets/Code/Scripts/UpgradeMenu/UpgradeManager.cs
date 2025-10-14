@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayFab.ClientModels;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager instance;
 
-    [SerializeField] private List<UpgradeNode> allNodes;
+    [SerializeField] private List<UpgradeDataHolder> allNodeDatas;
     [SerializeField] private UserManager userManager;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetTree();
+        }
+    }
     public void TryPurchase(UpgradeNode node)
     {
         if (node.CanPurchase)
@@ -47,11 +56,24 @@ public class UpgradeManager : MonoBehaviour
                     break;
             }
         }
+        UpdateUIData();
+    }
+
+    public void UpdateUIData()
+    {
+        foreach (UpgradeDataHolder item in allNodeDatas)
+        {
+            item.UpdateUpgradeNodeData();
+        }
     }
 
     public void ResetTree()
     {
-        foreach (var node in allNodes)
-            node.isPurchased = false;
+        foreach (var node in allNodeDatas)
+        {
+            node.upgradeNode.isPurchased = false;
+        }
+
+        UpdateUIData();
     }
 }

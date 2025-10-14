@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: CritDamageNode1
   m_EditorClassIdentifier: 
   isPurchased: 0
+  lockedSprite: {fileID: 398258930, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
+  unlockedSprite: {fileID: 1433959301, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
+  purchasedSprite: {fileID: 504133436, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   upgradeName: Critical Damage 1
   requiredNodes: []
   effects:

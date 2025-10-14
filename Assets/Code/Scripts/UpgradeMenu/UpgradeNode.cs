@@ -8,6 +8,11 @@ public class UpgradeNode : ScriptableObject
     [Header("Status")]
     public bool isPurchased = false;
 
+    [Header("UI")]
+    public Sprite lockedSprite;
+    public Sprite unlockedSprite;
+    public Sprite purchasedSprite;
+
     [Header("Attributes")]
     public string upgradeName;
 
@@ -17,6 +22,31 @@ public class UpgradeNode : ScriptableObject
     [Header("Effects")]
     public List<UpgradeEffect> effects = new List<UpgradeEffect>();
 
+    public string InfoText
+    {
+        get
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            sb.AppendLine($"<b>{upgradeName}</b>");
+            sb.AppendLine();
+
+            if (effects != null && effects.Count > 0)
+            {
+                foreach (var effect in effects)
+                {
+                    string sign = effect.value >= 0 ? "+" : "";
+                    sb.AppendLine($"{effect.type}: {sign}{effect.value}");
+                }
+            }
+            else
+            {
+                sb.AppendLine("No effects.");
+            }
+
+            return sb.ToString();
+        }
+    }
     public bool IsUnlocked
     {
         get
