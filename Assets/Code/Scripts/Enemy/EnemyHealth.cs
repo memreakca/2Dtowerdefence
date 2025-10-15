@@ -17,7 +17,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
-        maxHp = maxHp + (hpMultiplier * EnemySpawner.main.currentWave);
         hitPoints = maxHp;
         hpBarCanvas.SetActive(false);
 

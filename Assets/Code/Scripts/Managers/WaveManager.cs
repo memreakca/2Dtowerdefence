@@ -66,7 +66,10 @@ public class WaveManager : MonoBehaviour
 
             StartCoroutine(StartNextWave());
         }
-
+        if (currentWaveIndex >= waves.Count)
+        {
+            isSpawning = false;
+        }
 
     }
     private IEnumerator WaveCooldownRoutine(float duration)
@@ -88,8 +91,10 @@ public class WaveManager : MonoBehaviour
         forceStartWaveObject.SetActive(false);
 
     }
-
-
+    public bool IsAllWavesFinished()
+    {
+        return currentWaveIndex >= waves.Count && !isSpawning;
+    }
     public void ForceStartNextWave()
     {
         if (currentWaveIndex >= waves.Count)

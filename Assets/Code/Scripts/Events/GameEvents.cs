@@ -6,7 +6,7 @@ using static GameEvents;
 
 public class GameEvents : MonoBehaviour
 {
-    public delegate void BaseEventHandler(int dmg);
+    public delegate void BaseEventHandler(int dmg, EnemyAttributes enemy);
     public static event BaseEventHandler OnEnemyEnterBase;
 
     public delegate void CurrencyEventHandler(float quantity);
@@ -17,9 +17,9 @@ public class GameEvents : MonoBehaviour
     public static event EnemyEventHandler OnEnemySpawn;
     public static event EnemyEventHandler OnEnemyDie;
 
-    public static void EnemyEnteredBase(int dmg)
+    public static void EnemyEnteredBase(int dmg, EnemyAttributes enemy)
     {
-        OnEnemyEnterBase?.Invoke(dmg);
+        OnEnemyEnterBase?.Invoke(dmg,enemy);
     }
 
     public static void CurrencyGathered(float quantity)

@@ -132,7 +132,7 @@ public class EnemyAttributes : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Base"))
         {
-            GameEvents.EnemyEnteredBase(damageToBase);
+            GameEvents.EnemyEnteredBase(damageToBase,this);
             Destroy(gameObject);
         }
         else return;

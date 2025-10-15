@@ -39943,7 +39943,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 920847921}
-  - component: {fileID: 920847922}
   - component: {fileID: 920847923}
   m_Layer: 0
   m_Name: BuildManager
@@ -39967,34 +39966,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &920847922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920847919}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af864c8d94f19a24882ad210a01e0620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-  - {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
-  - {fileID: 8592982168578201694, guid: aa6e9392bf9c5f042be46b45f67b4642, type: 3}
-  - {fileID: 5749031610728715205, guid: 1a338d992db358e4db2832509a94dbff, type: 3}
-  - {fileID: 5749031610728715205, guid: 39f2aa7e1b48cd44f83cd2f446eae500, type: 3}
-  bossPrefab: {fileID: 7137802079078564809, guid: 45c6ce65345675f4a820b2a4d0770336, type: 3}
-  waveUI: {fileID: 1472508675}
-  maxWaveIndex: 30
-  baseEnemies: 8
-  enemiesPerSecond: 1
-  timeBetweenWaves: 3
-  difficultyScalingFactor: 0.7
-  enemiesPerSecondCap: 10
-  currentWave: 1
-  enemiesAlive: 0
 --- !u!114 &920847923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41177,8 +41148,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 885234962}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:

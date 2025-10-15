@@ -5,6 +5,8 @@ using UnityEngine;
 public class UserManager : MonoBehaviour
 {
     public static UserManager Instance;
+    [Header("Currency")]
+    public int starsGained;
 
     [Header("Upgrades")]
     public float bonusBps;
@@ -15,8 +17,15 @@ public class UserManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        DontDestroyOnLoad(this);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
