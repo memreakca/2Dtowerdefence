@@ -6,8 +6,6 @@ public class UserManager : MonoBehaviour
 {
     public static UserManager Instance;
 
-    public List<LevelObject> levelInfos = new List<LevelObject>();
-
     [Header("Upgrades")]
     public float bonusBps;
     public float bonusRange;
@@ -20,4 +18,5 @@ public class UserManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this);
     }
+
 }

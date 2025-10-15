@@ -12,17 +12,19 @@ public class GameStateManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] TextMeshProUGUI BaseHpText;
+    [SerializeField] TextMeshProUGUI gameTimeText;
     [SerializeField] private Image baseHpFillBar;
     [SerializeField] GameObject gameOverScreen;
 
     [Header("Attributes")]
     [SerializeField] public float maxBaseHP = 10;
     [SerializeField] public float baseHP;
+    [SerializeField] public float gameTime;
     [SerializeField] private float startCurrency;
     public float currency;
 
     private int enemiesAlive;
-
+    public bool isGameStarted = false;
     private List<EnemyAttributes> activeEnemies = new();
     private void OnEnable()
     {
@@ -39,6 +41,14 @@ public class GameStateManager : MonoBehaviour
         GameEvents.OnCurrencySpend -= SpendCurrency;
         GameEvents.OnEnemySpawn -= OnEnemySpawned;
         GameEvents.OnEnemyDie -= OnEnemyDied;
+    }
+    private void Update()
+    {
+        if (isGameStarted)
+        {
+            gameTime += Time.deltaTime;
+            gameTimeText.text = gameTime.ToString("0.00");
+        }
     }
     private void Start()
     {

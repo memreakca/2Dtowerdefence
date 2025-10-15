@@ -31,11 +31,12 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartNextWave());
+        forceStartWaveObject.SetActive(true);
     }
 
     private IEnumerator StartNextWave()
     {
+        GameStateManager.Instance.isGameStarted = true;
         UpdateWaveUI();
 
         isSpawning = true;
