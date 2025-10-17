@@ -5,16 +5,21 @@ using UnityEngine;
 public class EnemyAttributes : MonoBehaviour
 {
     public static EnemyAttributes main;
-    [Header("References")]
-    [SerializeField] public Rigidbody2D rb;
-    [SerializeField] protected SpriteRenderer sr;
-    [SerializeField] protected Animator animator;
+    [SerializeField] private EnemyObject enemySO;
 
-    [Header("Attiributes")]
-    [SerializeField] protected float moveSpeed = 2f;
-    [SerializeField] protected float enemyDamage;
-    [SerializeField] private float attackCooldown = 1f;
-    [SerializeField] private int damageToBase = 1;
+    [Header("Runtime")]
+    public Rigidbody2D rb;
+    public SpriteRenderer sr;
+    public Animator animator;
+
+    protected float moveSpeed;
+    protected float enemyDamage;
+    protected float attackCooldown;
+    protected int damageToBase;
+    protected int currencyWorth;
+    protected float maxHp;
+    public int GetCurrencyWorth() => currencyWorth;
+    public float GetMaxHp() => maxHp;
 
     private float attackTimer = 0f;
 
@@ -38,6 +43,13 @@ public class EnemyAttributes : MonoBehaviour
     }
     private void Start()
     {
+        moveSpeed = enemySO.moveSpeed;
+        enemyDamage = enemySO.enemyDamage;
+        attackCooldown = enemySO.attackCooldown;
+        damageToBase = enemySO.damageToBase;
+        currencyWorth = enemySO.currencyWorth;
+        maxHp = enemySO.maxHp;
+
         baseSpeed = moveSpeed;
         target = PathManager.main.path[pathIndex];
         originalColor = GetComponent<SpriteRenderer>().color;

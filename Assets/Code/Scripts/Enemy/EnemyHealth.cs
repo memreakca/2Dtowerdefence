@@ -5,42 +5,35 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [Header("Attributes")]
-    private float hitPoints = 4;
-    [SerializeField] private float maxHp = 4;
-    [SerializeField] private int currencyWorth = 50;
-    [SerializeField] private float hpMultiplier;
-    [SerializeField] Image hpBar;
-    [SerializeField] GameObject hpBarCanvas;
+    private float hitPoints;
+    [SerializeField] private Image hpBar;
+    [SerializeField] private GameObject hpBarCanvas;
 
+    private EnemyAttributes enemyAttributes;
     private bool isDestroyed = false;
 
     private void Start()
     {
-        hitPoints = maxHp;
+        enemyAttributes = GetComponent<EnemyAttributes>();
+        hitPoints = enemyAttributes.GetMaxHp();
         hpBarCanvas.SetActive(false);
-
     }
+
     public void TakeDamage(float dmg)
     {
         hitPoints -= dmg;
-
-        if (hitPoints < maxHp && hitPoints > 0)
+        if (hitPoints < enemyAttributes.GetMaxHp() && hitPoints > 0)
         {
             hpBarCanvas.SetActive(true);
-            hpBar.fillAmount = hitPoints / maxHp;
+            hpBar.fillAmount = hitPoints / enemyAttributes.GetMaxHp();
         }
-        else
-            hpBarCanvas.SetActive(false);
-
+        else hpBarCanvas.SetActive(false);
 
         if (hitPoints <= 0 && !isDestroyed)
         {
-            EnemySpawner.onEnemyDestroy.Invoke();
-            GameEvents.CurrencyGathered(currencyWorth);
-            GameEvents.EnemyDied(GetComponent<EnemyAttributes>());
+            GameEvents.CurrencyGathered(enemyAttributes.GetCurrencyWorth());
+            GameEvents.EnemyDied(enemyAttributes);
             isDestroyed = true;
         }
     }
-
 }
