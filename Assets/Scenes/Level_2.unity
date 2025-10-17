@@ -53808,31 +53808,37 @@ MonoBehaviour:
   waves:
   - waveIndexes:
     - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-      count: 10
+      count: 15
   - waveIndexes:
     - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-      count: 10
-    - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
-      count: 5
-  - waveIndexes:
-    - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-      count: 10
+      count: 15
     - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
       count: 10
   - waveIndexes:
     - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-      count: 10
+      count: 15
     - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
+      count: 15
+  - waveIndexes:
+    - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
+      count: 15
+    - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
+      count: 20
+    - enemyPrefab: {fileID: 8592982168578201694, guid: aa6e9392bf9c5f042be46b45f67b4642, type: 3}
+      count: 10
+  - waveIndexes:
+    - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
+      count: 15
+    - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
+      count: 20
+    - enemyPrefab: {fileID: 8592982168578201694, guid: aa6e9392bf9c5f042be46b45f67b4642, type: 3}
       count: 20
   - waveIndexes:
     - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-      count: 10
+      count: 15
     - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
       count: 20
-  - waveIndexes:
-    - enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
-      count: 20
-    - enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
+    - enemyPrefab: {fileID: 8592982168578201694, guid: aa6e9392bf9c5f042be46b45f67b4642, type: 3}
       count: 25
 --- !u!1 &1816766784
 GameObject:

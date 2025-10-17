@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdb2549ca763b674c8d6f81bc8f24342, type: 3}
-  m_Name: DamageNode1
+  m_Name: DamageNode2
   m_EditorClassIdentifier: 
   isPurchased: 0
   lockedSprite: {fileID: 398258930, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   unlockedSprite: {fileID: 1433959301, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   purchasedSprite: {fileID: 504133436, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
-  upgradeName: Damage 1
-  cost: 1
-  requiredNodes: []
+  upgradeName: Damage 2
+  cost: 2
+  requiredNodes:
+  - {fileID: 11400000, guid: 3dcc0cf1dc7383a4e87d388f6124b701, type: 2}
   effects:
   - type: 2
-    value: 0.2
+    value: 0.3

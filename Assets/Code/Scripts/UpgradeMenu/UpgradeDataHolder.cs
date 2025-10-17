@@ -17,7 +17,7 @@ public class UpgradeDataHolder : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         UpdateUpgradeNodeData();
     }
-
+    
     public void UpdateUpgradeNodeData()
     {
         if (upgradeNode == null) return;
@@ -33,8 +33,8 @@ public class UpgradeDataHolder : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (upgradeNode == null) return;
-        
-        UpgradeNodeUIController.Instance.Show(upgradeNode.InfoText);
+
+        UpgradeNodeUIController.Instance.Show(upgradeNode.InfoText,  eventData.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)

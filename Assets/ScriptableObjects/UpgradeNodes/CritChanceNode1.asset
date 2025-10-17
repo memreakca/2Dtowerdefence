@@ -17,6 +17,7 @@ MonoBehaviour:
   unlockedSprite: {fileID: 1433959301, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   purchasedSprite: {fileID: 504133436, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   upgradeName: Critical Chance 1
+  cost: 1
   requiredNodes: []
   effects:
   - type: 0

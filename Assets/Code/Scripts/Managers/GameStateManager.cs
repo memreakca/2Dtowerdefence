@@ -11,12 +11,16 @@ using UnityEngine.UI;
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance;
+    [Header("Level Complete UI References")]
+    [SerializeField] TextMeshProUGUI earnedStarsText;
+    [SerializeField] TextMeshProUGUI levelCompleteTimeText;
 
     [Header("UI References")]
     [SerializeField] TextMeshProUGUI BaseHpText;
     [SerializeField] TextMeshProUGUI gameTimeText;
     [SerializeField] private Image baseHpFillBar;
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject levelCompletedScreen;
 
     [Header("Attributes")]
     [SerializeField] public float maxBaseHP = 10;
@@ -44,6 +48,18 @@ public class GameStateManager : MonoBehaviour
         GameEvents.OnCurrencySpend -= SpendCurrency;
         GameEvents.OnEnemySpawn -= OnEnemySpawned;
         GameEvents.OnEnemyDie -= OnEnemyDied;
+    }
+
+    private void Start()
+    {
+        currency = startCurrency;
+        baseHP = maxBaseHP;
+        UpdateBaseHp();
+    }
+    private void Awake()
+    {
+        Instance = this;
+        Time.timeScale = 1;
     }
     private void Update()
     {
@@ -88,22 +104,20 @@ public class GameStateManager : MonoBehaviour
             currentLevel.earnedStars = starsEarned;
 
             UserManager.Instance.starsGained += newStars;
+            UserManager.Instance.unusedStars += newStars;
+
+            SaveManager.Instance.SaveGame();
+            OpenLevelCompletedUI(newStars);
         }
-
-        Debug.Log($"Level {currentLevel.levelNumber} tamamlandý. Kazanýlan yýldýz: {starsEarned} (Toplam: {UserManager.Instance.starsGained})");
-        gameOverScreen.SetActive(true);
-
     }
-    private void Start()
+
+    private void OpenLevelCompletedUI(int starCount)
     {
-        currency = startCurrency;
-        baseHP = maxBaseHP;
-        UpdateBaseHp();
-    }
-    private void Awake()
-    {
-        Instance = this;
-        Time.timeScale = 1;
+        var ts = TimeSpan.FromSeconds(gameTime);
+        levelCompleteTimeText.text = "Complete Time : " + string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
+        earnedStarsText.text = "Gained = " + starCount.ToString();
+        levelCompletedScreen.SetActive(true);
+        Time.timeScale = 0;
     }
     private void UpdateBaseHp()
     {

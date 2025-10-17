@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] TextMeshProUGUI waveUI;
+    [SerializeField] TextMeshProUGUI nextWaveInfoUIText;
     [SerializeField] private GameObject forceStartWaveObject;
     [SerializeField] private Image cooldownFillImage;
 
@@ -125,5 +126,23 @@ public class WaveManager : MonoBehaviour
     private void UpdateWaveUI()
     {
         waveUI.text = "Wave Number : " + (currentWaveIndex + 1).ToString();
+    }
+
+    public void UpdateNextWaveInfoUI()
+    {
+        Wave nextWave = waves[currentWaveIndex];
+        List<string> enemySummaries = new List<string>();
+
+        foreach (var waveIndex in nextWave.waveIndexes)
+        {
+            if (waveIndex.enemyPrefab != null)
+            {
+                string enemyName = waveIndex.enemyPrefab.name;
+                enemySummaries.Add($"{waveIndex.count} x {enemyName}");
+            }
+        }
+
+        string summary = string.Join(", ", enemySummaries);
+        nextWaveInfoUIText.text = $"Next Wave: {summary}";
     }
 }

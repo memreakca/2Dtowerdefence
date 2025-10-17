@@ -15,6 +15,7 @@ public class UpgradeNode : ScriptableObject
 
     [Header("Attributes")]
     public string upgradeName;
+    public int cost;
 
     [Header("Dependencies")]
     public List<UpgradeNode> requiredNodes;
@@ -29,7 +30,7 @@ public class UpgradeNode : ScriptableObject
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
             sb.AppendLine($"<b>{upgradeName}</b>");
-            sb.AppendLine();
+            sb.AppendLine($"<b>Cost = {cost} star</b>");
 
             if (effects != null && effects.Count > 0)
             {
@@ -51,6 +52,9 @@ public class UpgradeNode : ScriptableObject
     {
         get
         {
+            if (cost > UserManager.Instance.unusedStars)
+                return false;
+
             if (requiredNodes == null || requiredNodes.Count == 0)
                 return true;
 

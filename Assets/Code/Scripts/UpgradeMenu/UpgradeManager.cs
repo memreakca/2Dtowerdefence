@@ -8,7 +8,9 @@ using UnityEngine;
 public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager instance;
-
+    [Header("UI")]
+    public TextMeshProUGUI unusedStarsCountText;
+    [Header("Data")]
     [SerializeField] private List<UpgradeDataHolder> allNodeDatas;
     [SerializeField] private UserManager userManager;
 
@@ -23,6 +25,8 @@ public class UpgradeManager : MonoBehaviour
     {
         if (node.CanPurchase)
         {
+            userManager.spendStars(node.cost);
+            UpdateStarText();
             node.isPurchased = true;
             ApplyEffects(node);
             Debug.Log($"{node.upgradeName} alýndý!");
@@ -56,9 +60,13 @@ public class UpgradeManager : MonoBehaviour
                     break;
             }
         }
+        SaveManager.Instance.SaveGame();
         UpdateUIData();
     }
-
+    public void UpdateStarText()
+    {
+        unusedStarsCountText.text = userManager.unusedStars.ToString();
+    }
     public void UpdateUIData()
     {
         foreach (UpgradeDataHolder item in allNodeDatas)

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UserManager : MonoBehaviour
 {
     public static UserManager Instance;
+
     [Header("Currency")]
-    public int starsGained;
+    [HideInInspector] public int starsGained;
+    public int unusedStars;
 
     [Header("Upgrades")]
     public float bonusBps;
@@ -28,4 +31,13 @@ public class UserManager : MonoBehaviour
         }
     }
 
+    public void spendStars(int count)
+    {
+        if (count <= unusedStars)
+        {
+            unusedStars -= count;
+        }
+    }
+
+   
 }

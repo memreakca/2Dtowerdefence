@@ -17,9 +17,8 @@ MonoBehaviour:
   unlockedSprite: {fileID: 1433959301, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   purchasedSprite: {fileID: 504133436, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   upgradeName: BPS 1
+  cost: 1
   requiredNodes: []
   effects:
   - type: 3
     value: 0.1
-  - type: 2
-    value: 0.2
