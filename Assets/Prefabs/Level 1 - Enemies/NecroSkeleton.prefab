@@ -280,9 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d47455d53d9d94dbc240db64c150c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currencyWorth: 20
-  hpMultiplier: 0
   hpBar: {fileID: 9121271771507283321}
   hpBarCanvas: {fileID: 800005800565299014}
 --- !u!114 &6695951123649163248
@@ -297,11 +294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3094e08f826b449de8111dfaf141a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySO: {fileID: 11400000, guid: 89718a304d7f4dd4ab1e74b195ac4a41, type: 2}
   rb: {fileID: 9037757923043446238}
   sr: {fileID: 2685859062068918902}
   animator: {fileID: 6242214324212641581}
-  moveSpeed: 0.6
   pathIndex: 0
+  isFighting: 0
+  isDead: 0
+  targetHeroAttributes: {fileID: 0}
 --- !u!50 &9037757923043446238
 Rigidbody2D:
   serializedVersion: 4

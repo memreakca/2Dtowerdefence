@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,11 @@ public class WaveManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private PathManager pathManager;
 
+
     [Header("UI References")]
     [SerializeField] TextMeshProUGUI waveUI;
-    [SerializeField] TextMeshProUGUI nextWaveInfoUIText;
+    [SerializeField] GameObject waveInfoPrefab;
+    [SerializeField] Transform parentInfoPanel;
     [SerializeField] private GameObject forceStartWaveObject;
     [SerializeField] private Image cooldownFillImage;
 
@@ -50,7 +53,7 @@ public class WaveManager : MonoBehaviour
         {
             for (int i = 0; i < waveIndex.count; i++)
             {
-                var Enemy = Instantiate(waveIndex.enemyPrefab, pathManager.startPoint.position, Quaternion.identity);
+                var Enemy = Instantiate(waveIndex.enemy.enemyPrefab, pathManager.startPoint.position, Quaternion.identity);
                 GameEvents.EnemySpawned(Enemy.GetComponent<EnemyAttributes>());
                 yield return new WaitForSeconds(spawnInterval);
             }
@@ -62,8 +65,6 @@ public class WaveManager : MonoBehaviour
         {
 
             yield return StartCoroutine(WaveCooldownRoutine(timeBetweenWaves));
-
-            yield return new WaitForSeconds(timeBetweenWaves);
 
             StartCoroutine(StartNextWave());
         }
@@ -131,18 +132,24 @@ public class WaveManager : MonoBehaviour
     public void UpdateNextWaveInfoUI()
     {
         Wave nextWave = waves[currentWaveIndex];
-        List<string> enemySummaries = new List<string>();
 
+        // Önce mevcut çocuk objeleri temizle
+        foreach (Transform child in parentInfoPanel)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Yeni dalga bilgilerini oluþtur
         foreach (var waveIndex in nextWave.waveIndexes)
         {
-            if (waveIndex.enemyPrefab != null)
+            if (waveIndex.enemy.enemyPrefab != null)
             {
-                string enemyName = waveIndex.enemyPrefab.name;
-                enemySummaries.Add($"{waveIndex.count} x {enemyName}");
+                var waveInfo = Instantiate(waveInfoPrefab, parentInfoPanel);
+                waveInfo.GetComponentsInChildren<Image>()[1].sprite = waveIndex.enemy.sprite;
+                waveInfo.GetComponentInChildren<TextMeshProUGUI>().text =
+                    $"{waveIndex.enemy.enemyName} x{waveIndex.count}";
             }
         }
 
-        string summary = string.Join(", ", enemySummaries);
-        nextWaveInfoUIText.text = $"Next Wave: {summary}";
     }
 }

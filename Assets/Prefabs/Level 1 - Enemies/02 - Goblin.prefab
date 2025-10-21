@@ -280,12 +280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf6bcc1f05cd2b408e685b360a34177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySO: {fileID: 11400000, guid: e5a0c865d39319c40b1b6d60195c7213, type: 2}
   rb: {fileID: 3052684522211606542}
   sr: {fileID: 2383844648989886286}
   animator: {fileID: 8987502056121489167}
-  moveSpeed: 0.7
-  enemyDamage: 1
-  attackCooldown: 2
   pathIndex: 0
   isFighting: 0
   isDead: 0
@@ -302,9 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d47455d53d9d94dbc240db64c150c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 18
-  currencyWorth: 100
-  hpMultiplier: 1.3
   hpBar: {fileID: 3464216433776169541}
   hpBarCanvas: {fileID: 8133971892382322742}
 --- !u!50 &3052684522211606542

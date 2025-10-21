@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class WaveIndex
 {
-    public GameObject enemyPrefab;
+    public EnemyObject enemy;
     public int count;
 }

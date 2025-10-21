@@ -351,9 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d47455d53d9d94dbc240db64c150c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 2000
-  currencyWorth: 100
-  hpMultiplier: 0
   hpBar: {fileID: 8840855719241605647}
   hpBarCanvas: {fileID: 521479473148083276}
 --- !u!114 &5095994232190934186
@@ -368,13 +365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f88028f44864d146ae0576df7516375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySO: {fileID: 11400000, guid: b2d70d8a457fc9a45bbbc0fb19a81061, type: 2}
   rb: {fileID: 6490076948875273755}
   sr: {fileID: 4105166978045803712}
   animator: {fileID: 6773900074080376415}
-  moveSpeed: 0.3
-  enemyDamage: 10
-  attackCooldown: 3
-  damageToBase: 11
   pathIndex: 0
   isFighting: 0
   isDead: 0

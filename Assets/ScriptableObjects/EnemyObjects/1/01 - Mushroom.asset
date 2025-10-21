@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5749031610728715205, guid: 0373e5ed5ff395c44a1db7e74b77ea38, type: 3}
   enemyName: Mushroom
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 5
+  moveSpeed: 0.8
+  enemyDamage: 3
+  attackCooldown: 1
+  damageToBase: 1
+  currencyWorth: 50
   sprite: {fileID: -460455256, guid: b4163f9d17bf6e542977ae55f657286f, type: 3}
