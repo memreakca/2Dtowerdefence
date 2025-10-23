@@ -21,4 +21,4 @@ MonoBehaviour:
   requiredNodes: []
   effects:
   - type: 4
-    value: 0.1
+    value: 0.05

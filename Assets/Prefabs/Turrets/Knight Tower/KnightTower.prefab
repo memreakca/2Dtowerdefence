@@ -366,13 +366,13 @@ MonoBehaviour:
   heroAttackSpeedUpgradeFactor: 1.1
   heroHpUpgradeFactor: 1.5
   costUpgradeFactor: 2
-  UpgradeCost: 2000
+  UpgradeCost: 400
   maxTowerLevel: 5
   baseMaxHeroNumber: 1
-  baseHeroHp: 10
+  baseHeroHp: 20
   baseHeroDamage: 2
-  baseHeroAttackSpeed: 1
-  baseHeroRespawnCooldown: 30
+  baseHeroAttackSpeed: 2
+  baseHeroRespawnCooldown: 20
   heroSpawnRange: 1.5
   heroSpawnRadius: 0.2
   sellCost: 0

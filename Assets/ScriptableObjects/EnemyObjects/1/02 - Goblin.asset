@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8592982168578201694, guid: cee91332893175e4d8614bde35ccff1f, type: 3}
   enemyName: Goblin
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 2
+  moveSpeed: 0.9
+  enemyDamage: 1
+  attackCooldown: 1
+  damageToBase: 1
+  currencyWorth: 6
+  timeBeforeSpawn: 0.6
   sprite: {fileID: 4723107735738678597, guid: c1cdd26cc09ad224884556bc4d8296ae, type: 3}

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3985813755094363597, guid: c69727dc16a939d43aaf59ba33d2d1f9, type: 3}
   enemyName: NecroSkeleton
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 10
+  moveSpeed: 0.8
+  enemyDamage: 1
+  attackCooldown: 1
+  damageToBase: 1
+  currencyWorth: 20
+  timeBeforeSpawn: 0
   sprite: {fileID: -437181067, guid: 6be3776dd4d2af34081acd71ed32a3ee, type: 3}

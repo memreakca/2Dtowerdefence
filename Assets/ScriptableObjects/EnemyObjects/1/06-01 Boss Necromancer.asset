@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7137802079078564809, guid: 45c6ce65345675f4a820b2a4d0770336, type: 3}
   enemyName: Necromancer
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 50
+  moveSpeed: 0.6
+  enemyDamage: 10
+  attackCooldown: 2
+  damageToBase: 10
+  currencyWorth: 100
+  timeBeforeSpawn: 10
   sprite: {fileID: -1058737285, guid: a7c12b47b194cc741804b4672587db2a, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 3
   earnedStars: 0
-  minimumCompleteTime: 120
+  minimumCompleteTime: 900

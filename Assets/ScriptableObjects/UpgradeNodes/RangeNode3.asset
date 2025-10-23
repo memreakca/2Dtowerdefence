@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb8746c7eec08074bb9d7b2afb48b9db, type: 2}
   effects:
   - type: 4
-    value: 0.3
+    value: 0.1

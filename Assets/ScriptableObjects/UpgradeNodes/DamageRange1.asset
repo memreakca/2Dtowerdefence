@@ -17,12 +17,12 @@ MonoBehaviour:
   unlockedSprite: {fileID: 1433959301, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   purchasedSprite: {fileID: 504133436, guid: f6c7431039c3b914ab1b05fc2aa3f2fc, type: 3}
   upgradeName: Damage - Range 1
-  cost: 1
+  cost: 2
   requiredNodes:
   - {fileID: 11400000, guid: 3dcc0cf1dc7383a4e87d388f6124b701, type: 2}
   - {fileID: 11400000, guid: 6acfd151ef5f6864ebd7fda657698ea1, type: 2}
   effects:
   - type: 2
-    value: 0.1
+    value: 0.05
   - type: 4
-    value: 0.1
+    value: 0.05

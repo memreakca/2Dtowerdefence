@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5749031610728715205, guid: 1a338d992db358e4db2832509a94dbff, type: 3}
   enemyName: Flying Eye
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 3
+  moveSpeed: 1.2
+  enemyDamage: 1
+  attackCooldown: 1
+  damageToBase: 1
+  currencyWorth: 10
+  timeBeforeSpawn: 0.7
   sprite: {fileID: -4795363162621231457, guid: 6d7cd4f7505dc674c891ca8946cfd98b, type: 3}

@@ -28,6 +28,8 @@ public class WaveManager : MonoBehaviour
     private int currentWaveIndex = 0;
     private bool isSpawning = false;
 
+    private float remainingCooldownTime = 0f;
+
     private void Awake()
     {
         Instance = this;
@@ -55,7 +57,7 @@ public class WaveManager : MonoBehaviour
             {
                 var Enemy = Instantiate(waveIndex.enemy.enemyPrefab, pathManager.startPoint.position, Quaternion.identity);
                 GameEvents.EnemySpawned(Enemy.GetComponent<EnemyAttributes>());
-                yield return new WaitForSeconds(spawnInterval);
+                yield return new WaitForSeconds(waveIndex.enemy.timeBeforeSpawn);
             }
         }
 
@@ -84,10 +86,12 @@ public class WaveManager : MonoBehaviour
         while (timer < duration)
         {
             timer += Time.deltaTime;
+            remainingCooldownTime = duration - timer;
             cooldownFillImage.fillAmount = 1f - (timer / duration);
             yield return null;
         }
 
+        remainingCooldownTime = 0f;
         cooldownFillImage.fillAmount = 0f;
 
         forceStartWaveObject.SetActive(false);
@@ -101,23 +105,27 @@ public class WaveManager : MonoBehaviour
     {
         if (currentWaveIndex >= waves.Count)
         {
-            Debug.Log("Tüm dalgalar tamamlandý, yeni dalga yok.");
             return;
         }
 
         // Sonraki dalgadaki toplam düþman sayýsýný hesapla
-        int totalEnemiesNextWave = 0;
+        float totalEnemyWorth = 0f;
         foreach (var waveIndex in waves[currentWaveIndex].waveIndexes)
         {
-            totalEnemiesNextWave += waveIndex.count;
+            if (waveIndex.enemy != null && waveIndex.enemy.enemyPrefab != null)
+            {
+                totalEnemyWorth += waveIndex.enemy.currencyWorth * waveIndex.count;
+            }
         }
 
-        // Ödül miktarýný belirle (örneðin her düþman baþýna 5 altýn)
-        int reward = totalEnemiesNextWave * 5;
+        float timeRatio = 1f - Mathf.Clamp01(remainingCooldownTime / timeBetweenWaves);
+        float earlyPenalty = 1f - timeRatio;
+
+        int reward = Mathf.RoundToInt(totalEnemyWorth * 0.2f * earlyPenalty);
 
         // Oyuncuya ödül ver (örnek: GameManager üzerinden)
         GameEvents.CurrencyGathered(reward);
-        Debug.Log($"Sonraki dalga için {reward} altýn verildi ({totalEnemiesNextWave} düþman).");
+        GameManager.instance.SpawnCoinPrefab(forceStartWaveObject.transform,reward);
 
         // Beklemeden sonraki dalgayý baþlat
         StopAllCoroutines(); // Eðer mevcut coroutine beklemede ise iptal et

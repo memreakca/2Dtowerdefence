@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8592982168578201694, guid: aa6e9392bf9c5f042be46b45f67b4642, type: 3}
   enemyName: Beast Shroom
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 6
+  moveSpeed: 0.6
+  enemyDamage: 1
+  attackCooldown: 1
+  damageToBase: 1
+  currencyWorth: 12
+  timeBeforeSpawn: 1
   sprite: {fileID: 4723107735738678597, guid: f8b30c2afe165d645b54d500a9c30862, type: 3}

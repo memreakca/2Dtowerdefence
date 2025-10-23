@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5749031610728715205, guid: 39f2aa7e1b48cd44f83cd2f446eae500, type: 3}
   enemyName: Skeleton
-  maxHp: 0
-  moveSpeed: 0
-  enemyDamage: 0
-  attackCooldown: 0
-  damageToBase: 0
-  currencyWorth: 0
+  maxHp: 7
+  moveSpeed: 0.7
+  enemyDamage: 1
+  attackCooldown: 1
+  damageToBase: 1
+  currencyWorth: 15
+  timeBeforeSpawn: 1
   sprite: {fileID: 4723107735738678597, guid: 1018b0ba13578bf459bd254ae1a2be99, type: 3}

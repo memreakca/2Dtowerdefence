@@ -9,11 +9,50 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3e31feed01787764bb3b2292b9def448
   - enabled: 1
-    path: Assets/Scenes/Level_1.unity
+    path: Assets/Scenes/Levels/Level_1.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
-    path: Assets/Scenes/Level_2.unity
-    guid: 2960501c9ca546f4282fff09a66555b5
+    path: Assets/Scenes/Levels/Level_2.unity
+    guid: 57b0bad9d6997174c98e938d78203739
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_3.unity
+    guid: 3d7c5cc518c838140b9bd611824a60a8
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_4.unity
+    guid: ab2d7475edb524b4b9594ce2a85f0e4c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_5.unity
+    guid: 3c25175f6b8882b4290c9626b2cfc536
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_6.unity
+    guid: 27f1766affd6a2749aa96429a11c78a5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_7.unity
+    guid: c1c00d9fd9b0b314692d7c42d1a27649
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_8.unity
+    guid: c8e09dd1265b9c44d8fcf05cdde32a01
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_9.unity
+    guid: 2ab6d1c2d2de89b4f9af8b9a6b12d218
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_10.unity
+    guid: 561877256c54a16478a5ca6d3239586a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_11.unity
+    guid: b24ee68efb20c924da1edc96d903fc3d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_12.unity
+    guid: 24ec6ceda0d4165429568d0d234bbfd5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_13.unity
+    guid: 64169c26aa187714691088457da0776a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_14.unity
+    guid: 562fb0bf219b6344a9b9095494012a2c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_15.unity
+    guid: 59e686bf5ae64754db7897a62477ca74
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 56186f75eb5bdbc42982ce16c21af6d3, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: a97fd4b2b0975904a8cfa117a521905c, type: 2}

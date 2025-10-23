@@ -7,6 +7,7 @@ public class EnemyAttributes : MonoBehaviour
     public static EnemyAttributes main;
     [SerializeField] private EnemyObject enemySO;
 
+
     [Header("Runtime")]
     public Rigidbody2D rb;
     public SpriteRenderer sr;
@@ -24,6 +25,7 @@ public class EnemyAttributes : MonoBehaviour
     private float attackTimer = 0f;
 
     private bool isSlowed = false;
+    private bool isShocked = false;
     protected float baseSpeed;
     private Transform target;
     public int pathIndex = 0;
@@ -135,7 +137,16 @@ public class EnemyAttributes : MonoBehaviour
             isSlowed = true;
             moveSpeed *= slowFactor;
             GetComponent<SpriteRenderer>().color = Color.Lerp(originalColor, Color.blue, 0.3f);
-            // Reset the speed after the duration
+            StartCoroutine(ResetSpeedAfterDelay(duration));
+        }
+    }
+    public void ApplyShock(float duration)
+    {
+        if (!isShocked)
+        {
+            isShocked = true;
+            moveSpeed *= 0;
+            GetComponent<SpriteRenderer>().color = Color.Lerp(originalColor, Color.red, 0.3f);
             StartCoroutine(ResetSpeedAfterDelay(duration));
         }
     }
@@ -176,8 +187,10 @@ public class EnemyAttributes : MonoBehaviour
             rb.velocity = Vector2.zero;
             float dieAnimLength = animator.GetCurrentAnimatorStateInfo(0).length - 0.05f;
             Destroy(gameObject, dieAnimLength);
+            GameManager.instance.SpawnCoinPrefab(this.transform,enemySO.currencyWorth);
             this.enabled = false;
         }
     }
 
+    
 }

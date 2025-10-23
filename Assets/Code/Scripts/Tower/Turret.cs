@@ -17,8 +17,8 @@ public class Turret : MonoBehaviour
     [SerializeField] TextMeshProUGUI SellCostUI;
     [SerializeField] private Transform towerRotationPoint;
     [SerializeField] private LayerMask enemyMask;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform firingPoint;
+    [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected Transform firingPoint;
     [SerializeField] private Animator animator;
 
     [Header("UpgradeTowerMultipliers")]
@@ -54,11 +54,14 @@ public class Turret : MonoBehaviour
 
     [Header("IN-GAME Modifed - Used Attributes")]
 
-    [SerializeField] private float modifiedDamage;
-    [SerializeField] private float modifiedRange;
-    [SerializeField] private float modifiedBps;
+    [SerializeField] public float modifiedDamage;
+    [SerializeField] public float modifiedRange;
+    [SerializeField] public float modifiedBps;
 
-    public float sellCost;
+    [Header("HideInInspector")]
+    [HideInInspector] public float sellCost;
+    [HideInInspector] public Transform target;
+    [HideInInspector] public float timeUntilFire;
     private void Start()
     {
         projectileDamage = baseProjectileDamage;
@@ -76,7 +79,7 @@ public class Turret : MonoBehaviour
     public void ChangeUpgradedValues()
     {
 
-        bonusBps = UserManager.Instance.bonusBps;
+        bonusBps = UserManager.Instance.bonusBps;       
         bonusRange = UserManager.Instance.bonusRange;
         bonusDamage = UserManager.Instance.bonusDamage;
 
@@ -106,8 +109,6 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private Transform target;
-    private float timeUntilFire;
 
     public void SellTower()
     {
@@ -127,10 +128,10 @@ public class Turret : MonoBehaviour
 
         SellCostUI.text = "Sell Tower " + (UpgradeCost * 0.4).ToString() + "<sprite index= 0>";
     }
-    void Update()
+    public void Update()
     {
-        
-        animator.speed = modifiedBps / baseBps;
+
+        animator.speed = Mathf.Max(1f, modifiedBps / baseBps);
 
         if (target == null || target.GetComponent<EnemyAttributes>().isDead)
         {
@@ -161,7 +162,7 @@ public class Turret : MonoBehaviour
         animator.SetTrigger("Shoot");
     }
 
-    public void SpawnProjectile()
+    protected virtual void SpawnProjectile()
     {
         GameObject projectileObj = Instantiate(projectilePrefab, firingPoint.position, Quaternion.identity);
         IProjectile damageScript = projectileObj.GetComponent<IProjectile>();

@@ -108,8 +108,13 @@ public class SaveManager : MonoBehaviour
                 allLevels[i].earnedStars = data.levelStars[i];
         }
     }
+
+
+    [ContextMenu("Reset Save Data")]
     public void ResetData()
     {
         PlayerPrefs.DeleteKey(SAVE_KEY);
+        PlayerPrefs.Save();
+        Debug.Log("Save verisi sýfýrlandý.");
     }
 }

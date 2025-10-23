@@ -1076,21 +1076,21 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5848697185760695170, guid: bd7cf9863e59fa948a2c4f983e21f993, type: 3}
   firingPoint: {fileID: 4407230714655638163}
   animator: {fileID: 8125781380155485190}
-  bpsUpgradeFactor: 1.2
-  rangeUpgradeFactor: 1.2
-  costUpgradeFactor: 2
-  UpgradeCost: 500
+  bpsUpgradeFactor: 1.1
+  rangeUpgradeFactor: 1.05
+  costUpgradeFactor: 1.8
+  UpgradeCost: 200
   isRotateable: 0
   angleOffset: -90
   rotationSpeed: 235
   maxTowerLevel: 5
-  baseBps: 1.5
+  baseBps: 1
   baseTargetingRange: 1.5
-  baseProjectileDamage: 2.5
-  baseProjectileSpeed: 4
+  baseProjectileDamage: 0.75
+  baseProjectileSpeed: 3
   projectileDamage: 0
-  targetingRange: 1.2
-  bps: 1.5
+  targetingRange: 0
+  bps: 0
   TowerLevel: 1
   bonusDamage: 0
   bonusRange: 0

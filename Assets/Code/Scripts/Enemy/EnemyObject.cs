@@ -14,6 +14,7 @@ public class EnemyObject : ScriptableObject
     public float attackCooldown;
     public int damageToBase;
     public int currencyWorth;
+    public float timeBeforeSpawn;
 
     [Header("Visuals")]
     public Sprite sprite;
