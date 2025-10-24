@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5749031610728715205, guid: 1a338d992db358e4db2832509a94dbff, type: 3}
   enemyName: Flying Eye
-  maxHp: 3
-  moveSpeed: 1.2
+  maxHp: 4
+  moveSpeed: 1.3
   enemyDamage: 1
   attackCooldown: 1
   damageToBase: 1

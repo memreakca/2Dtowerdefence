@@ -100,7 +100,7 @@ public class Turret : MonoBehaviour
                 GameEvents.CurrencySpend(UpgradeCost);
                 bps = bps * bpsUpgradeFactor;
                 targetingRange = targetingRange * rangeUpgradeFactor;
-                UpgradeCost = UpgradeCost * costUpgradeFactor;
+                UpgradeCost = Mathf.RoundToInt(UpgradeCost * costUpgradeFactor);
                 TowerLevel++;
                 ChangeUpgradedValues();
                 UpdateUI();

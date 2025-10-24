@@ -1079,7 +1079,7 @@ MonoBehaviour:
   bpsUpgradeFactor: 1.1
   rangeUpgradeFactor: 1.05
   costUpgradeFactor: 1.8
-  UpgradeCost: 200
+  UpgradeCost: 300
   isRotateable: 0
   angleOffset: -90
   rotationSpeed: 235
@@ -1099,6 +1099,8 @@ MonoBehaviour:
   modifiedRange: 0
   modifiedBps: 0
   sellCost: 100
+  target: {fileID: 0}
+  timeUntilFire: 0
 --- !u!95 &8125781380155485190
 Animator:
   serializedVersion: 5

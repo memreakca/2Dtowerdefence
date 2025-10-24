@@ -317,7 +317,7 @@ MonoBehaviour:
   angleOffset: -90
   rotationSpeed: 235
   maxTowerLevel: 5
-  baseBps: 0.4
+  baseBps: 0.5
   baseTargetingRange: 2.25
   baseProjectileDamage: 3
   baseProjectileSpeed: 5
@@ -332,6 +332,8 @@ MonoBehaviour:
   modifiedRange: 0
   modifiedBps: 0
   sellCost: 10
+  target: {fileID: 0}
+  timeUntilFire: 0
 --- !u!95 &690445123533390898
 Animator:
   serializedVersion: 5

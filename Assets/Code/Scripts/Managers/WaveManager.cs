@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] TextMeshProUGUI waveUI;
+    [SerializeField] GameObject waveTypeNotification;
     [SerializeField] GameObject waveInfoPrefab;
     [SerializeField] Transform parentInfoPanel;
     [SerializeField] private GameObject forceStartWaveObject;
@@ -38,6 +39,7 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         forceStartWaveObject.SetActive(true);
+        UpdateWaveUI();
     }
 
     private IEnumerator StartNextWave()
@@ -57,7 +59,13 @@ public class WaveManager : MonoBehaviour
             {
                 var Enemy = Instantiate(waveIndex.enemy.enemyPrefab, pathManager.startPoint.position, Quaternion.identity);
                 GameEvents.EnemySpawned(Enemy.GetComponent<EnemyAttributes>());
-                yield return new WaitForSeconds(waveIndex.enemy.timeBeforeSpawn);
+                if (wave.WaveType == WaveType.Swarm)
+                {
+                    yield return new WaitForSeconds(waveIndex.enemy.timeBeforeSpawn * 0.7f);
+                }
+                else
+                    yield return new WaitForSeconds(waveIndex.enemy.timeBeforeSpawn);
+
             }
         }
 
@@ -79,6 +87,11 @@ public class WaveManager : MonoBehaviour
     private IEnumerator WaveCooldownRoutine(float duration)
     {
         forceStartWaveObject.SetActive(true);
+
+        if (waves[currentWaveIndex].WaveType == WaveType.Swarm)
+            waveTypeNotification.SetActive(true);
+        else
+            waveTypeNotification.SetActive(false);
 
         float timer = 0f;
         cooldownFillImage.fillAmount = 1f;
@@ -125,7 +138,7 @@ public class WaveManager : MonoBehaviour
 
         // Oyuncuya ödül ver (örnek: GameManager üzerinden)
         GameEvents.CurrencyGathered(reward);
-        GameManager.instance.SpawnCoinPrefab(forceStartWaveObject.transform,reward);
+        GameManager.instance.SpawnCoinPrefab(forceStartWaveObject.transform, reward);
 
         // Beklemeden sonraki dalgayý baþlat
         StopAllCoroutines(); // Eðer mevcut coroutine beklemede ise iptal et
@@ -135,6 +148,11 @@ public class WaveManager : MonoBehaviour
     private void UpdateWaveUI()
     {
         waveUI.text = "Wave Number : " + (currentWaveIndex + 1).ToString();
+
+        if (waves[currentWaveIndex].WaveType == WaveType.Swarm)
+            waveTypeNotification.SetActive(true);
+        else
+            waveTypeNotification.SetActive(false);
     }
 
     public void UpdateNextWaveInfoUI()

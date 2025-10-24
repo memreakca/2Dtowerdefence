@@ -241,9 +241,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7637528849480179392, guid: e15a9545be96acb469d2bc775ae1e294, type: 3}
   firingPoint: {fileID: 9014452508650935262}
   animator: {fileID: 3052808299717274752}
-  bpsUpgradeFactor: 1.1
-  rangeUpgradeFactor: 1.1
-  costUpgradeFactor: 1.6
+  bpsUpgradeFactor: 1.05
+  rangeUpgradeFactor: 1.05
+  costUpgradeFactor: 1.7
   UpgradeCost: 100
   isRotateable: 1
   angleOffset: -90
@@ -264,6 +264,8 @@ MonoBehaviour:
   modifiedRange: 0
   modifiedBps: 0
   sellCost: 10
+  target: {fileID: 0}
+  timeUntilFire: 0
 --- !u!95 &3052808299717274752
 Animator:
   serializedVersion: 5

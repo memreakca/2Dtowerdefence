@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 683455938070171823}
         m_TargetAssemblyTypeName: Turret, Assembly-CSharp
         m_MethodName: SellTower
         m_Mode: 1
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 683455938070171823}
         m_TargetAssemblyTypeName: Turret, Assembly-CSharp
         m_MethodName: UpgradeTower
         m_Mode: 1
@@ -1134,19 +1134,19 @@ MonoBehaviour:
   bpsUpgradeFactor: 1.1
   rangeUpgradeFactor: 1.1
   costUpgradeFactor: 1.6
-  UpgradeCost: 300
+  UpgradeCost: 400
   isRotateable: 0
   angleOffset: 0
   rotationSpeed: 0
   maxTowerLevel: 5
-  baseBps: 1
+  baseBps: 0.9
   baseTargetingRange: 1.5
-  baseProjectileDamage: 1.25
+  baseProjectileDamage: 1
   baseProjectileSpeed: 0
   projectileDamage: 0
   targetingRange: 0
   bps: 0
-  TowerLevel: 0
+  TowerLevel: 1
   bonusDamage: 0
   bonusRange: 0
   bonusBps: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8592982168578201694, guid: aa6e9392bf9c5f042be46b45f67b4642, type: 3}
   enemyName: Beast Shroom
-  maxHp: 6
+  maxHp: 7
   moveSpeed: 0.6
   enemyDamage: 1
   attackCooldown: 1
